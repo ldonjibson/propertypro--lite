@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="description" content="E-Propertypor-lite A Light Weight Banking Application">
+    <meta name="keywords" content="Properties in Nigeria">
+    <meta name="author" content="Propertypor-lite">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Register | Real Estate and Property for Sale and Rent | Property Pro Lite</title>
+</head>
+
+<body onload="loading()">
+    <div id="loader"></div>
+    <div id="body-content" class="animate-bottom">
+        <!-- header -->
+        <header>
+            <a href="../index.html" alt="logo" class="logo float-left"> PropertyPro-Lite</a>
+            <nav>
+                <ul class="">
+                    <li><a href="../all-properties.html" title="All Property" active><i class="fa fa-home"></i> All Properties</a></li>
+                    <li><a href="./profile.html" title="Manage Profile"><i class="fa fa-user-md"></i> Manage Profile</a></li>
+                    <li><a href="./post-a-property.html" title="Post-a-property"><i class="fa fa-building-o"></i> Post A Property</a></li>
+                    <li><a href="./my-listed-property.html" title="My listed properties"><i class="fa fa-building"></i> My Properties</a></li>
+                    <li><a href="../login.html" title="Logout" class="a-logout"><i class="fa fa-sign-in"></i> Logout</a></li>
+
+                </ul>
+                <a href="#" class="float-right burger" id="burger" onclick="menuToggle();">&#9776;</a>
+            </nav>
+        </header>
+        <div id="mobile-m">
+            <ul class="mobile" id="mobilemenu">
+                <li><a href="../all-properties.html" title="All Property" active><i class="fa fa-home"></i> All Properties</a></li>
+                <li><a href="./profile.html" title="Manage Profile"><i class="fa fa-user-md"></i> Manage Profile</a></li>
+                <li><a href="./post-a-property.html" title="Post-a-property"><i class="fa fa-building-o"></i> Post A Property</a></li>
+                <li><a href="./my-listed-property.html" title="My listed properties"><i class="fa fa-building"></i> My Properties</a></li>
+                <li><a href="../login.html" title="Logout" class="a-logout"><i class="fa fa-sign-in"></i> Logout</a></li>
+
+            </ul>
+        </div>
+        <!-- end header -->
+        <!-- content-area -->
+        <div class="contains">
+            <div class="row">
+                <div class="cl-4 remove-cl-padding">
+                    <div class="text-block-login-register">
+                        <h4 class="hcolor">Rules of Posting a Property</h4>
+                        <p class="">
+                            PropertyPro-Lite is the leading real estate property center platform in Nigeria. with a web-based platform for property retails and sales. We provide user with the best property search experience both online and offline by connecting them with legitimate
+                            and verified real estate agents.
+                            <ol class="ordered-list text-left">
+                                <li>Rule one we pride ourselves in ...</li>
+                                <li>Rule two we do not condone fraud acts.</li>
+                                <li>Rule three is just like rule 2</li>
+                                <li>Rule is post genuine property</li>
+                            </ol>
+                        </p>
+                    </div>
+                </div>
+                <div class="cl-8 remove-cl-padding">
+                    <form class="form-shape cl-12 remove-cl-padding" id="register-form" action="." onsubmit="registerLoad();">
+                        <h3 class="tshadow"> Post Property Form</h3><br/>
+                        <div id="registering"></div>
+                        <div class="cl-6 remove-cl-padding">
+                            <select name="accounttype" required>
+                            <option disabled selected>Aquisition Type</option>
+                            <option>Buy</option>
+                            <option>Rent</option>
+                            <option>Shortlet</option>
+                            <option>Land</option>
+                        </select>
+                        </div>
+                        <div class="cl-6 remove-cl-padding">
+                            <select class="" name="aquisitiontype" required>
+                            <option class="" disabled selected>Property Type</option>
+                            <option class="" value="commercial-property/shop">Shop</option> 
+                            <option class="" value="commercial-property/office-space">Office Spaces</option>
+                            <option class="" value="flat-apartment">Flats and Apartments</option>
+                            <option class="" value="land">Lands</option>
+                            <option class="" value="house/semi-detached-bungalow">Semi Detached Bungalow</option>
+                            <option class="" value="house/semi-detached-duplex">Semi Detached Duplex</option>
+                            <option class="" value="co-working-space">Co-working Space</option>
+                            <option class="" value="house/detached-bungalow">Detached Bungalow</option>
+                            <option class="" value="commercial-property/warehouse">Warehouse</option>
+                            <option class="" value="commercial-property/shop-in-a-mall">Shop In A Mall</option>
+                            <option class="" value="flat-apartment/self-contain">Self Contain</option>
+                            <option class="" value="flat-apartment/mini-flat">Mini Flats</option>
+                            <option class="" value="house/detached-duplex">Detached Duplex</option>
+                            <option class="" value="house">Houses</option>
+                            <option class="" value="house/terraced-bungalow">Terraced Bungalow</option>
+                            <option class="" value="commercial-property">Commercial Properties</option> 
+                            <option class="" value="house/terraced-duplex">Terraced Duplex</option>
+                        </select>
+                        </div>
+                        <div class="cl-6 remove-cl-padding">
+                            <select name="bedroom" class="" required> 
+                            <option class="" value="" disabled selected>Bed</option>
+                            <option class="" value="1">1 bedroom</option>
+                            <option class="" value="2">2 bedroom</option>
+                            <option class="" value="3">3 bedroom</option>
+                            <option class="" value="4">4 bedroom</option>
+                            <option class="" value="5">5 bedroom</option>
+                            <option class="" value="6">6 bedroom</option>
+                            <option class="" value="10">7+ bedroom</option> 
+                        </select>
+                        </div>
+                        <div class="cl-6 remove-cl-padding">
+                            <select name="toilet" class="" required> 
+                            <option class="" value="" disabled selected>Toilet</option>
+                            <option class="" value="1">1 toilets</option>
+                            <option class="" value="2">2 toilets</option>
+                            <option class="" value="3">3 toilets</option>
+                            <option class="" value="4">4 toilets</option>
+                            <option class="" value="5">5 toilets</option>
+                            <option class="" value="6">6 toilets</option>
+                            <option class="" value="10">7+ toilets</option> 
+                        </select>
+                        </div>
+                        <div class="cl-6 remove-cl-padding">
+                            <select name="toilet" class="" required> 
+                            <option class="" value="" disabled selected>Bathroom</option>
+                            <option class="" value="1">1 bathroom</option>
+                            <option class="" value="2">2 bathrooms</option>
+                            <option class="" value="3">3 bathrooms</option>
+                            <option class="" value="4">4 bathrooms</option>
+                            <option class="" value="5">5 bathrooms</option>
+                            <option class="" value="6">6 bathrooms</option>
+                            <option class="" value="10">7+ bathrooms</option> 
+                        </select>
+                        </div>
+                        <div class="cl-6 remove-cl-padding">
+                            <select name="max_price" class="" required> 
+                            <option class="" value="" disabled selected>Max price</option>
+                            <option class="" value="500000">#500,000</option>
+                            <option class="" value="600000">#600,000</option> 
+                            <option class="" value="700000">#700,000</option> 
+                            <option class="" value="800000">#800,000</option>
+                            <option class="" value="900000">#900,000</option> 
+                            <option class="" value="1000000">#1million +</option>
+                        </select>
+                        </div>
+                        <div class="cl-6 remove-cl-padding">
+                            <input type="text" name="address" placeholder="Address" class="" required>
+                        </div>
+                        <div class="cl-6 remove-cl-padding">
+                            <input type="text" name="city" placeholder="City" class="">
+                        </div>
+                        <div class="cl-6 remove-cl-padding">
+                            <input type="text" name="state" placeholder="State" class="" required>
+                        </div>
+                        <div class="cl-6 remove-cl-padding">
+                            <input type="text" name="country" placeholder="Nigeria" value="Nigeria" class="disabled" disabled>
+                        </div>
+                        <div class="remove-cl-padding">
+                            <textarea type="text" name="description" placeholder="Description" maxlength="1000" rows="5" class="" required></textarea>
+                        </div>
+                        <div class="remove-cl-padding">
+                            <input type="file" name="profile-img">
+                        </div>
+                        <div class="space ">
+                            <button class="btn btn-basic btn-register " type="submit " id="register ">Publish Property</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- content area -->
+        <!--footer-->
+        <div class="footer ">
+            <div class="contains ">
+                <div class="cl-5 ">
+                    <h3 class="text-color text-left ">Quick Links</h3>
+                    <ul class="text-left no-style ">
+                        <li><a href="./index.html " title="Home " active>Home</a></li>
+                        <li><a href="./post-a-property.html" title="Post-a-property"> Post A Property</a></li>
+                        <li><a href="../login.html " title="Login ">Login</a></li>
+                        <li><a href="../register.html " title="Register ">Register</a></li>
+                    </ul>
+                </div>
+                <div class="cl-7 ">
+                    <h3 class="text-color text-left ">Connect With Us</h3>
+                    <p class="text-left nodeco ">
+                        <div class="text-left "><a href="tel:2348181384092 "><i class="fa fa-phone-square fa-2x "> +2348181384092</i></a>
+                            <a href="fb/ PropertyPro-Lite "><i class="fa fa-facebook-square fa-2x "> @ PropertyPro-Lite</i></a></div>
+                        <div class="text-left "><a href="mailto:support@ PropertyPro-Lite.com "><i class="fa fa-envelope fa-2x "> support@ PropertyPro-Lite.com</i></a></div>
+                        <div class="text-left "><a href="twitter/ PropertyPro-Lite "><i class="fa fa-twitter-square fa-2x "> @ PropertyPro-Lite</i></a></div>
+                        <div class="text-color text-left "><b><u>Location:</u></b></div>
+                        <div class="sp text-left ">
+                            AH10001 Suite, NewYork, USA.
+                        </div>
+                    </p>
+                </div>
+            </div>
+            <hr class="hr ">
+            <div class="center cl-12 footer-logo "> &copy; copyright 2019. PropertyPro-Lite</div>
+        </div>
+        <!-- footer -->
+    </div>
+    <script type="text/javascript" src="../js/main.js"></script>
+</body>
+
+</html>

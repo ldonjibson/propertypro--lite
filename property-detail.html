@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="description" content="E-Propertypor-lite A Light Weight Banking Application">
+    <meta name="keywords" content="Properties in Nigeria">
+    <meta name="author" content="Propertypor-lite">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/responsive.css">
+    <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <title>Property Detail | Real Estate and Property for Sale and Rent | Property Pro Lite</title>
+</head>
+
+<body onload="loading()">
+    <div id="loader"></div>
+    <div id="body-content" class="animate-bottom">
+        <!-- header -->
+        <header>
+            <a href="./index.html" alt="logo" class="logo float-left"> PropertyPro-Lite</a>
+            <nav>
+                <ul class="">
+                    <li><a href="./all-properties.html" title="All Property" active><i class="fa fa-home"></i> All Properties</a></li>
+                    <li><a href="./post-a-property.html" title="Post-a-property"><i class="fa fa-building-o"></i> Post A Property</a></li>
+                    <li><a href="./login.html" title="Login" class="a-login"><i class="fa fa-sign-in"></i> Login</a></li>
+                    <li><a href="./register.html" title="Register" class="a-register"><i class="fa fa-user-plus"></i> Register</a></li>
+
+                </ul>
+                <a href="#" class="float-right burger" id="burger" onclick="menuToggle();">&#9776;</a>
+            </nav>
+        </header>
+        <div id="mobile-m">
+            <ul class="mobile" id="mobilemenu">
+                <li><a href="./all-properties.html" title="All Property" active><i class="fa fa-home"></i> All Properties</a></li>
+                <li><a href="./post-a-property.html" title="Post-a-property"><i class="fa fa-building-o"></i> Post A Property</a></li>
+                <li><a href="./login.html" title="Login" class="a-login"><i class="fa fa-sign-in"></i> Login</a></li>
+                <li><a href="./register.html" title="Register" class="a-register"><i class="fa fa-user-plus"></i> Register</a></li>
+
+            </ul>
+        </div>
+        <!-- end header -->
+        <!-- banner area -->
+        <div class="contains closeupspace">
+            <div class="">
+                <div class="">
+                    <p class="">
+                        <h4>Re-define Your Search<br>
+                            <small>
+							Search properties for sale and for rent in Nigeria
+						</small>
+                        </h4>
+                    </p>
+                    <form class="">
+                        <input type="" class="searchlocation" name="search" placeholder="Where do you plan to live?">
+                        <select class="searchselect" name="aquisitiontype">
+					<option class="searchoption">Aquisition Type</option>
+					<option class="searchoption" value="">Buy</option>
+					<option class="searchoption" value="">Rent</option>
+					<option class="searchoption" value="">Shortlet</option>
+					<option class="searchoption" value="">Land</option>
+                    </select>
+                        <select class="searchselect" name="aquisitiontype">
+                        <option class="searchoption">Property Type</option>
+                        <option class="searchoption" value="commercial-property/shop">Shop</option> 
+                        <option class="searchoption" value="commercial-property/office-space">Office Spaces</option>
+                        <option class="searchoption" value="flat-apartment">Flats and Apartments</option>
+                        <option class="searchoption" value="land">Lands</option>
+                        <option class="searchoption" value="house/semi-detached-bungalow">Semi Detached Bungalow</option>
+                        <option class="searchoption" value="house/semi-detached-duplex">Semi Detached Duplex</option>
+                        <option class="searchoption" value="co-working-space">Co-working Space</option>
+                        <option class="searchoption" value="house/detached-bungalow">Detached Bungalow</option>
+                        <option class="searchoption" value="commercial-property/warehouse">Warehouse</option>
+                        <option class="searchoption" value="commercial-property/shop-in-a-mall">Shop In A Mall</option>
+                        <option class="searchoption" value="flat-apartment/self-contain">Self Contain</option>
+                        <option class="searchoption" value="flat-apartment/mini-flat">Mini Flats</option>
+                        <option class="searchoption" value="house/detached-duplex">Detached Duplex</option>
+                        <option class="searchoption" value="house">Houses</option>
+                        <option class="searchoption" value="house/terraced-bungalow">Terraced Bungalow</option>
+                        <option class="searchoption" value="commercial-property">Commercial Properties</option> 
+                        <option class="searchoption" value="house/terraced-duplex">Terraced Duplex</option>
+                    </select>
+                        <select name="bedroom" class="searchselect"> 
+                        <option class="searchoption" value="">Bed</option>
+                        <option class="searchoption" value="1">1 bedroom</option>
+                        <option class="searchoption" value="2">2 bedroom</option>
+                        <option class="searchoption" value="3">3 bedroom</option>
+                        <option class="searchoption" value="4">4 bedroom</option>
+                        <option class="searchoption" value="5">5 bedroom</option>
+                        <option class="searchoption" value="6">6 bedroom</option>
+                        <option class="searchoption" value="10">7+ bedroom</option> 
+                    </select>
+                        <select name="max_price" class="searchselect"> 
+                        <option class="searchoption" value="">Max price</option>
+                        <option class="searchoption" value="500000">#500,000</option>
+                        <option class="searchoption" value="600000">#600,000</option> 
+                        <option class="searchoption" value="700000">#700,000</option> 
+                        <option class="searchoption" value="800000">#800,000</option>
+                        <option class="searchoption" value="900000">#900,000</option> 
+                        <option class="searchoption" value="1000000">#1million +</option>
+                    </select>
+                        <button class="searchbutton" name="search" type="submit"><i class="fa fa-search"></i>Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- end banner -->
+        <!-- boxed area-->
+        <div class="contain">
+            <div class="row">
+                <div class="cl-8">
+                    <h3>Featured Properties</h3>
+                    <div class="boxed">
+                        <img class="img-prop" src="https://is1-3.housingcdn.com/4f2250e8/ca965ceef77ee490644a458f46871ac9/v0/large/vishal_sanjivini-tukkuguda-hyderabad-vishal_projects_limited.jpg" width="100%" height="auto">
+                        <h4>For Sale</h4>
+                        <br/>
+                        <div>
+                            Grow your money with us for future investments and opportunities with attractive interest rates
+                            <p>
+                                <span><i class="fa fa-bath"></i> 3 bed</span>
+                                <span><i class="fa fa-bath"></i> 3 bath</span>
+                                <span><i class="fa fa-bath"></i> 4 toilet</span>
+                            </p>
+                        </div>
+                        <div>
+                            <h3>Price (NGN): 600,000 </h3><br/>
+                        </div>
+                        <div>
+                            <h4>Location</h4>
+                            <p>
+                                Grow your money with us for future investments and opportunities with attractive interest rates
+                            </p>
+                        </div>
+                        <div>
+                            <h4>Full Details</h4>
+                            <p>
+                                Grow your money with us for future investments and opportunities with attractive interest rates
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="cl-4">
+                    <h3>Contact Agent</h3>
+                    <div class="boxed">
+                        <img src="./images/man-placeholder.jpg" class="profile-img remove-cl-padding">
+                        <h4>Eleko Real Estate Agents</h4><br/>
+                        <div>
+                            <a href="#" class="property-text">Grow your money with us for future investments and opportunities with attractive interest rates</a>
+                        </div>
+                        <br/>
+                        <h3><i class="fa fa-phone"></i> : <a href="tel:0818100223344">0818100223344</a></h3>
+                        <h3><i class="fa fa-envelope"></i> : <a href="mailto:prolite@prolite.com">prolite@prolite.com</a></h3>
+                        <br/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end boxed -->
+        <!--footer-->
+        <div class="footer">
+            <div class="contains">
+                <div class="cl-5">
+                    <h3 class="text-color text-left">Quick Links</h3>
+                    <ul class="text-left no-style ">
+                        <li><a href="./index.html" title="Home" active>Home</a></li>
+                        <li><a href="./post-a-property.html" title="Post-a-property"> Post A Property</a></li>
+                        <li><a href="./login.html" title="Login">Login</a></li>
+                        <li><a href="./register.html" title="Register">Register</a></li>
+                    </ul>
+                </div>
+                <div class="cl-7">
+                    <h3 class="text-color text-left">Connect With Us</h3>
+                    <p class="text-left nodeco">
+                        <div class="text-left"><a href="tel:2348181384092"><i class="fa fa-phone-square fa-2x"> +2348181384092</i></a>
+                            <a href="fb/ PropertyPro-Lite"><i class="fa fa-facebook-square fa-2x"> @ PropertyPro-Lite</i></a></div>
+                        <div class="text-left"><a href="mailto:support@ PropertyPro-Lite.com"><i class="fa fa-envelope fa-2x"> support@ PropertyPro-Lite.com</i></a></div>
+                        <div class="text-left"><a href="twitter/ PropertyPro-Lite"><i class="fa fa-twitter-square fa-2x"> @ PropertyPro-Lite</i></a></div>
+                        <div class="text-color text-left"><b><u>Location:</u></b></div>
+                        <div class="sp text-left">
+                            AH10001 Suite, NewYork, USA.
+                        </div>
+                    </p>
+                </div>
+            </div>
+            <hr class="hr">
+            <div class="center cl-12 footer-logo"> &copy; copyright 2019. PropertyPro-Lite</div>
+        </div>
+        <!-- footer -->
+    </div>
+    <script type="text/javascript" src="./js/main.js"></script>
+</body>
+
+</html>
