@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="description" content="E-Propertypor-lite A Light Weight Banking Application">
+    <meta name="keywords" content="Properties in Nigeria">
+    <meta name="author" content="Propertypor-lite">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/responsive.css">
+    <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Register | Real Estate and Property for Sale and Rent | Property Pro Lite</title>
+</head>
+
+<body onload="loading()">
+    <div id="loader"></div>
+    <div id="body-content" class="animate-bottom">
+        <!-- header -->
+        <header>
+            <a href="./index.html" alt="logo" class="logo float-left"> PropertyPro-Lite</a>
+            <nav>
+                <ul class="">
+                    <li><a href="./all-properties.html" title="All Property" active><i class="fa fa-home"></i> All Properties</a></li>
+                    <li><a href="./login.html" title="Post-a-property"><i class="fa fa-building-o"></i> Post A Property</a></li>
+                    <li><a href="./login.html" title="Login" class="a-login"><i class="fa fa-sign-in"></i> Login</a></li>
+                    <li><a href="./register.html" title="Register" class="a-register"><i class="fa fa-user-plus"></i> Register</a></li>
+
+                </ul>
+                <a href="#" class="float-right burger" id="burger" onclick="menuToggle();">&#9776;</a>
+            </nav>
+        </header>
+        <div id="mobile-m">
+            <ul class="mobile" id="mobilemenu">
+                <li><a href="./all-properties.html" title="All Property" active><i class="fa fa-home"></i> All Properties</a></li>
+                <li><a href="./login.html" title="Post-a-property"><i class="fa fa-building-o"></i> Post A Property</a></li>
+                <li><a href="./login.html" title="Login" class="a-login"><i class="fa fa-sign-in"></i> Login</a></li>
+                <li><a href="./register.html" title="Register" class="a-register"><i class="fa fa-user-plus"></i> Register</a></li>
+
+            </ul>
+        </div>
+        <!-- end header -->
+        <!-- content-area -->
+        <div class="contains">
+            <div class="row">
+                <div class="cl-6">
+                    <div class="text-block-login-register">
+                        <h3 class="hcolor">Register To PropertyPro-Lite</h3>
+                        <p class="">
+                            PropertyPro-Lite is the leading real estate property center platform in Nigeria. with a web-based platform for property retails and sales. We provide user with the best property search experience both online and offline by connecting them with legitimate
+                            and verified real estate agents.
+                        </p>
+                    </div>
+                </div>
+                <div class="cl-6">
+                    <form class="form-shape cl-12" id="register-form" action="." onsubmit="registerLoad();">
+                        <h3 class="tshadow"> PropertyPro-Lite Registration Form</h3>
+                        <p>Kindly complete the form below</p>
+                        <div id="registering"></div>
+                        <div>
+                            <input type="text" name="firstname" placeholder="First Name" class="">
+                        </div>
+                        <div>
+                            <input type="text" name="lastname" placeholder="Last Name" class="">
+                        </div>
+                        <div>
+                            <input type="text" name="email" placeholder="Email ..." class="">
+                        </div>
+                        <div>
+                            <input type="text" name="tel" placeholder="+234818010000" class="">
+                        </div>
+                        <div>
+                            <input type="password" name="password" placeholder="Password">
+                        </div>
+                        <div>
+                            <input type="password" name="password1" placeholder="Confirm password">
+                        </div>
+                        <div>
+                            <select name="accounttype">
+							<option value="" disabled selected>Account Type</option>
+							<option value="user">User</option>
+							<option value="agent">Agent</option>
+						</select>
+                        </div>
+                        <div class="space ">
+                            <button class="btn btn-basic btn-register " type="submit " id="register ">Register</button>
+                        </div>
+                        <div>
+                            <p>Already have an account? <a href="./login.html " class="tshadow2 "><b>Login Here </b></a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- content area -->
+        <!--footer-->
+        <div class="footer ">
+            <div class="contains ">
+                <div class="cl-5 ">
+                    <h3 class="text-color text-left ">Quick Links</h3>
+                    <ul class="text-left no-style ">
+                        <li><a href="./index.html " title="Home " active>Home</a></li>
+                        <li><a href="./service.html " title="Services ">Services</a></li>
+                        <li><a href="./login.html " title="Login ">Login</a></li>
+                        <li><a href="./register.html " title="Register ">Register</a></li>
+                    </ul>
+                </div>
+                <div class="cl-7 ">
+                    <h3 class="text-color text-left ">Connect With Us</h3>
+                    <p class="text-left nodeco ">
+                        <div class="text-left "><a href="tel:2348181384092 "><i class="fa fa-phone-square fa-2x "> +2348181384092</i></a>
+                            <a href="fb/ PropertyPro-Lite "><i class="fa fa-facebook-square fa-2x "> @ PropertyPro-Lite</i></a></div>
+                        <div class="text-left "><a href="mailto:support@ PropertyPro-Lite.com "><i class="fa fa-envelope fa-2x "> support@ PropertyPro-Lite.com</i></a></div>
+                        <div class="text-left "><a href="twitter/ PropertyPro-Lite "><i class="fa fa-twitter-square fa-2x "> @ PropertyPro-Lite</i></a></div>
+                        <div class="text-color text-left "><b><u>Location:</u></b></div>
+                        <div class="sp text-left ">
+                            AH10001 Suite, NewYork, USA.
+                        </div>
+                    </p>
+                </div>
+            </div>
+            <hr class="hr ">
+            <div class="center cl-12 footer-logo "> &copy; copyright 2019. PropertyPro-Lite</div>
+        </div>
+        <!-- footer -->
+    </div>
+    <script type="text/javascript" src="./js/main.js"></script>
+</body>
+
+</html>
