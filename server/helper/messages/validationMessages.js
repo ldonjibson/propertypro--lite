@@ -9,4 +9,7 @@ ValidationMessages.phoneNumber = 'Enter a valid Phone Number';
 ValidationMessages.id = 'Invalid id, id must be a number';
 ValidationMessages.accountType = 'account type can only be agent and client';
 ValidationMessages.isAdmin = 'Indicate Administrative Post';
+ValidationMessages.city = 'Enter the city where the property is located';
+ValidationMessages.state = 'Enter the state where the property is located';
+ValidationMessages.address = 'Enter the address of the property';
 export default ValidationMessages;
