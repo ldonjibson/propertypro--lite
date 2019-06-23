@@ -13,6 +13,7 @@ class RegularExpression {
       password: /[a-zA-Z0-9]{8,}/,
       accountType: /(client|agent)$/i,
       isAdmin: /(true|false)$/i,
+      address: /^[a-zA-Z0-9_][a-zA-Z0-9_ ]*[a-zA-Z0-9_]$/,
     };
   }
 }

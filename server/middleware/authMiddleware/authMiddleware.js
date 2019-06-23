@@ -1,7 +1,6 @@
 /* eslint-disable prefer-destructuring */
-import TokenManager from '../../helper/tokenManager/index';
 import response from '../../helper/response/index';
-import pool from '../../db/config';
+import users from '../../model/users';
 /**
  * @class AuthMiddleware
  * @description class contains function for implementing Authentication middleware
@@ -18,24 +17,22 @@ class AuthMiddleware {
   // eslint-disable-next-line consistent-return
   static async checkIfUserIsAuthenticated(req, res, next) {
     try {
-      const { authorization } = req.headers;
+      const { authorization } = req.headers || req.params || req.body;
       if (!authorization) {
         return response(res, 401, 'You are not signed in.');
       }
       const token = authorization;
-      const decoded = await TokenManager.verify(token);
+      const decoded = await users.find(user => user.token === token);
       if (decoded) {
         req.userDetails = decoded;
         return next();
       }
     } catch (error) {
-      const { name } = error;
-      if (name === 'TokenExpiredError' || name === 'JsonWebTokenError' || name === 'TypeError') {
-        return response(res, 401, 'You are not signed in.');
-      }
-      return response(res, 500, 'An error occured on the server');
+      return response(res, 401, 'You are not signed in.');
     }
+    return response(res, 500, 'An error occured on the server');
   }
+
 
   static async checkUserById(req, res, next) {
     /**
@@ -47,11 +44,10 @@ class AuthMiddleware {
      * @returns {object} returns error message if user is not authenticated
      */
     try {
-      const userDetails = await pool.query('select * from users where id = $1', [req.userDetails.id]);
-      if (!userDetails.rows[0]) {
+      const userDetails = await users.find(user => user.id === req.userDetails.id);
+      if (!userDetails) {
         return response(res, 404, 'User account not found');
       }
-      req.customer = userDetails.rows[0];
     } catch (error) {
       return response(res, 500, 'Server error');
     }

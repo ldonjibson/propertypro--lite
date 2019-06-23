@@ -25,10 +25,10 @@ class DoValidation {
 
   static userName(req, res, next) {
     const { firstName, lastName } = req.body;
-    if (!firstName){
+    if (!firstName) {
       return response(res, 400, ValidationMessages.firstName);
     }
-    if (!lastName){
+    if (!lastName) {
       return response(res, 400, ValidationMessages.lastName);
     }
     const validate = RegularExpression.validate();
@@ -77,6 +77,24 @@ class DoValidation {
     if (!validate.isAdmin.test(isAdmin)) {
       return response(res, 400, ValidationMessages.isAdmin);
     }
+    return next();
+  }
+
+  static address(req, res, next) {
+    const { city, state, address } = req.body;
+    if (!city) { return response(res, 400, ValidationMessages.city); }
+    if (!state) { return response(res, 400, ValidationMessages.state); }
+    if (!address) { return response(res, 400, ValidationMessages.address); }
+    const validate = RegularExpression.validate();
+    if (!validate.address.test(city.trim())) {
+      return response(res, 400, ValidationMessages.city);
+    }
+    if (!validate.address.test(state.trim())) {
+      return response(res, 400, ValidationMessages.state);
+    }
+    // if (!validate.address.test(address.trim())) {
+    //   return response(res, 400, ValidationMessages.address);
+    // }
     return next();
   }
 }
