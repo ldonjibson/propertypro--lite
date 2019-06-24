@@ -20,4 +20,12 @@ propertyRoutes.post('/',
   DoValidation.address,
   UploadingImage.uploadFile,
   PropertyController.postProperty);
+
+propertyRoutes.patch('/:propertyId',
+  AuthMiddleware.checkIfUserIsAuthenticated,
+  AuthMiddleware.checkUserById,
+  AccountValidation.agentChecker,
+  DoValidation.address,
+  UploadingImage.uploadFile,
+  PropertyController.updateProperty);
 export default propertyRoutes;
