@@ -4,6 +4,7 @@
 
 import response from '../helper/response/index';
 import properties from '../model/property';
+import users from '../model/users';
 
 /**
     * @class PropertyController
@@ -12,7 +13,6 @@ import properties from '../model/property';
     * @param {object} res - Response object
     * @returns {object} Json
     */
-// class PropertyController {
 class PropertyController {
   /**
     * @static postProperty
@@ -32,9 +32,9 @@ class PropertyController {
       const newProperty = { id, owner, status, type, state, city, address, price, created_on, image_url };
       newProperty.address = address.trim();
       properties.push(newProperty);
-      return response(res, 201, 'Successfully posted a new property', newProperty)      
+      return response.successResponse(res, 201, 'success', newProperty)
     } catch (error) {
-      return response(res, 500, 'Server error');
+      return response.errorResponse(res, 500, 'error', 'Server error');
     }
   }
 
@@ -55,15 +55,119 @@ class PropertyController {
     try {
       let getProperty = await properties.find(property => property.id === parseInt(propertyId) && property.owner === parseInt(userid));
       if (!getProperty) {
-        return response(res, 401, 'You are not authorized to edit this property')      
+        return response.errorResponse(res, 401, 'error', 'You are not authorized to edit this property')
       }
       getProperty.address = address.trim();
-      const [id, status, owner] = [propertyId, getProperty.status, userid ];
+      const [id, status, owner] = [propertyId, getProperty.status, userid];
       getProperty = { id, owner, status, type, city, state, address, price, imageUrl };
-      return response(res, 201, 'Successfully updated property', getProperty)      
+      return response.successResponse(res, 201, 'success', getProperty);
     } catch (error) {
-      return response(res, 500, 'Server error');
+      return response.errorResponse(res, 500, 'error', 'Server error');
     }
   }
+
+  // /**
+  //   * @static updateStatusProperty
+  //   * @description Allow a user to Update StatusProperty
+  //   * @param {object} req - Request object
+  //   * @param {object} res - Response object
+  //   * @returns {object} Json
+  //   * @memberof PropertyController
+  //   */
+  // static async updateStatusProperty(req, res) {
+  //   const {
+  //     userDetails: { id: userid },
+  //     params: { propertyId },
+  //   } = req;
+  //   try {
+  //     const getProperty = await properties.find(property => property.id === parseInt(propertyId) && property.owner === parseInt(userid));
+  //     if (!getProperty) {
+  //       return response.errorResponse(res, 401, 'error', 'You are not authorized to edit this property');
+  //     }
+  //     getProperty.status = 'sold';
+  //     return response.successResponse(res, 201, 'success', getProperty);
+  //   } catch (error) {
+  //     return response.errorResponse(res, 500, 'error', 'Server error');
+  //   }
+  // }
+
+  // /**
+  //   * @static deleteProperty
+  //   * @description Allow a agent to delete Property
+  //   * @param {object} req - Request object
+  //   * @param {object} res - Response object
+  //   * @returns {object} Json
+  //   * @memberof PropertyController
+  //   */
+  // static async deleteProperty(req, res) {
+  //   const {
+  //     userDetails: { id: userid },
+  //     params: { propertyId },
+  //   } = req;
+  //   try {
+  //     const getProperty = await properties.find(property => property.id === parseInt(propertyId) && property.owner === parseInt(userid));
+  //     if (!getProperty) {
+  //       return response.errorResponse(res, 401, 'error', 'You are not authorized to delete this property');
+  //     }
+  //     delete properties[parseInt(propertyId) - 1];
+  //     return response.successResponse(res, 200, 'success', { message: 'Property deleted successfully.'});
+  //   } catch (error) {
+  //     return response.errorResponse(res, 500, 'error', 'Server error');
+  //   }
+  // }
+
+  // /**
+  //   * @static listProperties
+  //   * @description Allow a user to view all Properties and specific type properties
+  //   * @param {object} req - Request object
+  //   * @param {object} res - Response object
+  //   * @returns {object} Json
+  //   * @memberof PropertyController
+  //   */
+  // static async listProperties(req, res) {
+  //   const { type } = req.query;
+  //   try {
+  //     if (type) {
+  //       const getTypeProperties = await properties.filter(property => property.type === type);
+  //       const listTypeProperties = await getTypeProperties.map((property) => {
+  //         const getPropertyOwner = users.find(user => user.id === property.owner);
+  //         [property.ownerEmail, property.ownerPhoneNumber] = [getPropertyOwner.email , getPropertyOwner.phoneNumber];
+  //         return property;
+  //       });
+  //       if (listTypeProperties.length === 0) {
+  //         return response.errorResponse(res, 404, 'error', 'No property was found');
+  //       }
+  //       return response.successResponse(res, 200, 'success', listTypeProperties);
+  //     }
+  //     const allProperties = await properties.map((property) => {
+  //       const getPropertyOwner = users.find(user => user.id === property.owner);
+  //       [property.ownerEmail, property.ownerPhoneNumber] = [getPropertyOwner.email , getPropertyOwner.phoneNumber];
+  //       return property;
+  //     });
+  //     return response.successResponse(res, 200, 'success', allProperties);
+  //   } catch (error) {
+  //     return response.errorResponse(res, 500, 'error', 'Server error');
+  //   }
+  // }
+
+  // /**
+  //   * @static specificPropertyDetail
+  //   * @description Allow a user to view details of a specific Properties
+  //   * @param {object} req - Request object
+  //   * @param {object} res - Response object
+  //   * @returns {object} Json
+  //   * @memberof PropertyController
+  //   */
+  // static async specificPropertyDetail(req, res) {
+  //   const { propertyId } = req.params;
+  //   try {
+  //     const detailProperty = await properties.find(property => property.id === parseInt(propertyId));
+  //     const getPropertyOwner = await users.find(user => user.id === detailProperty.owner);
+  //     [detailProperty.ownerEmail, detailProperty.ownerPhoneNumber] = [getPropertyOwner.email , getPropertyOwner.phoneNumber];
+  //     return response.successResponse(res, 200, 'success', detailProperty);
+  //   } catch (error) {
+  //     return response.errorResponse(res, 500, 'error', 'Server error');
+  //   }
+  // }
 }
 export default PropertyController;
