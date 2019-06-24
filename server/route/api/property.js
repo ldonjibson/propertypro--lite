@@ -30,12 +30,12 @@ propertyRoutes.patch('/:propertyId',
   UploadingImage.uploadFile,
   PropertyController.updateProperty);
 
-// propertyRoutes.patch('/:propertyId/sold',
-//   DoValidation.id,
-//   AuthMiddleware.checkIfUserIsAuthenticated,
-//   AuthMiddleware.checkUserById,
-//   AccountValidation.agentChecker,
-//   PropertyController.updateStatusProperty);
+propertyRoutes.patch('/:propertyId/sold',
+  DoValidation.id,
+  AuthMiddleware.checkIfUserIsAuthenticated,
+  AuthMiddleware.checkUserById,
+  AccountValidation.agentChecker,
+  PropertyController.updateStatusProperty);
 
 // propertyRoutes.delete('/:propertyId',
 //   AuthMiddleware.checkIfUserIsAuthenticated,
