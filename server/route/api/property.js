@@ -37,11 +37,11 @@ propertyRoutes.patch('/:propertyId/sold',
   AccountValidation.agentChecker,
   PropertyController.updateStatusProperty);
 
-// propertyRoutes.delete('/:propertyId',
-//   AuthMiddleware.checkIfUserIsAuthenticated,
-//   AuthMiddleware.checkUserById,
-//   AccountValidation.agentChecker,
-//   PropertyController.deleteProperty);
+propertyRoutes.delete('/:propertyId',
+  AuthMiddleware.checkIfUserIsAuthenticated,
+  AuthMiddleware.checkUserById,
+  AccountValidation.agentChecker,
+  PropertyController.deleteProperty);
 
 // propertyRoutes.get('/',
 //   PropertyController.listProperties);
