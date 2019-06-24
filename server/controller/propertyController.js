@@ -116,39 +116,39 @@ class PropertyController {
     }
   }
 
-  // /**
-  //   * @static listProperties
-  //   * @description Allow a user to view all Properties and specific type properties
-  //   * @param {object} req - Request object
-  //   * @param {object} res - Response object
-  //   * @returns {object} Json
-  //   * @memberof PropertyController
-  //   */
-  // static async listProperties(req, res) {
-  //   const { type } = req.query;
-  //   try {
-  //     if (type) {
-  //       const getTypeProperties = await properties.filter(property => property.type === type);
-  //       const listTypeProperties = await getTypeProperties.map((property) => {
-  //         const getPropertyOwner = users.find(user => user.id === property.owner);
-  //         [property.ownerEmail, property.ownerPhoneNumber] = [getPropertyOwner.email , getPropertyOwner.phoneNumber];
-  //         return property;
-  //       });
-  //       if (listTypeProperties.length === 0) {
-  //         return response.errorResponse(res, 404, 'error', 'No property was found');
-  //       }
-  //       return response.successResponse(res, 200, 'success', listTypeProperties);
-  //     }
-  //     const allProperties = await properties.map((property) => {
-  //       const getPropertyOwner = users.find(user => user.id === property.owner);
-  //       [property.ownerEmail, property.ownerPhoneNumber] = [getPropertyOwner.email , getPropertyOwner.phoneNumber];
-  //       return property;
-  //     });
-  //     return response.successResponse(res, 200, 'success', allProperties);
-  //   } catch (error) {
-  //     return response.errorResponse(res, 500, 'error', 'Server error');
-  //   }
-  // }
+  /**
+    * @static listProperties
+    * @description Allow a user to view all Properties and specific type properties
+    * @param {object} req - Request object
+    * @param {object} res - Response object
+    * @returns {object} Json
+    * @memberof PropertyController
+    */
+  static async listProperties(req, res) {
+    const { type } = req.query;
+    try {
+      if (type) {
+        const getTypeProperties = await properties.filter(property => property.type === type);
+        const listTypeProperties = await getTypeProperties.map((property) => {
+          const getPropertyOwner = users.find(user => user.id === property.owner);
+          [property.ownerEmail, property.ownerPhoneNumber] = [getPropertyOwner.email , getPropertyOwner.phoneNumber];
+          return property;
+        });
+        if (listTypeProperties.length === 0) {
+          return response.errorResponse(res, 404, 'error', 'No property was found');
+        }
+        return response.successResponse(res, 200, 'success', listTypeProperties);
+      }
+      const allProperties = await properties.map((property) => {
+        const getPropertyOwner = users.find(user => user.id === property.owner);
+        [property.ownerEmail, property.ownerPhoneNumber] = [getPropertyOwner.email , getPropertyOwner.phoneNumber];
+        return property;
+      });
+      return response.successResponse(res, 200, 'success', allProperties);
+    } catch (error) {
+      return response.errorResponse(res, 500, 'error', 'Server error');
+    }
+  }
 
   // /**
   //   * @static specificPropertyDetail

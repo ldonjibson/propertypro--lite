@@ -43,8 +43,8 @@ propertyRoutes.delete('/:propertyId',
   AccountValidation.agentChecker,
   PropertyController.deleteProperty);
 
-// propertyRoutes.get('/',
-//   PropertyController.listProperties);
+propertyRoutes.get('/',
+  PropertyController.listProperties);
 
 // propertyRoutes.get('/:propertyId',
 //   DoValidation.id,
