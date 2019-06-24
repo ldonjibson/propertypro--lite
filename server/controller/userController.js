@@ -24,18 +24,49 @@ class UserController {
     let newUser;
     try {
       const hashPassword = await PasswordManager.hashPassword(password);
-      const userDetails = users.find(user => user.email === email);
+      const userDetails = await users.find(user => user.email === email);
       if (userDetails) {
-        return response(res, 409, 'Email already in use');
+        return response.errorResponse(res, 409, 'error', 'Email already in use');
       }
-      let id; let isAdmin; let createdOn;
-      [id, isAdmin, createdOn, password] = [users.length + 1, false, Date.now(), hashPassword ];
-      newUser = { id, firstName, lastName, email, password, phoneNumber, address, accountType, isAdmin, createdOn}     
-      users.push(newUser)
+      let id; let isAdmin; let createdOn; let token;
+      [token, id, isAdmin, createdOn, password] = [`45erkjherht4549${Math.floor(Math.random() * 10000)}`, users.length + 1, false, Date.now(), hashPassword ];
+      newUser = { token, id, firstName, lastName, email, password, phoneNumber, address, accountType, isAdmin, createdOn}     
+      users.push(newUser);
     } catch (error) {
-      return response(res, 500, 'Server error');
+      return response.errorResponse(res, 500, 'error', 'Server error');
     }
-    return response(res, 201, 'Successfully created a new user account', newUser);
+    return response.successResponse(res, 201, 'success', newUser);
+  }
+
+  /**
+   * @static signin
+   * @description Allows a user to sign in
+   * @param {object} req - Request object
+   * @param {object} res - Response object
+   * @returns {object} Json
+   * @memberof UserControllers
+   */
+  static async signin(req, res) {
+    const { email, password } = req.body;
+    let userDetails;
+    let isPasswordValid;
+    try {
+      userDetails = await users.find(user => user.email === email);
+      if (!userDetails) {
+        return response.errorResponse(res, 404, 'error', 'User doesn\'t exist');
+      }
+      isPasswordValid = PasswordManager.verifyPassword(password, userDetails.password);
+      if (!isPasswordValid) {
+        return response.errorResponse(res, 400, 'error', 'Incorrect Password or Email');
+      }
+    } catch (error) {
+      return response.errorResponse(res, 500, 'error', 'Server error');
+    }
+    delete userDetails.password;
+    if (isPasswordValid) {
+      return response.successResponse(res, 200, 'success', userDetails);
+    }
+    return response.errorResponse(res, 400, 'error', 'Invalid Password or Email');
   }
 }
 
