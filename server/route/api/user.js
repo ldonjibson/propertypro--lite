@@ -20,12 +20,4 @@ userRoutes.post(
   UserController.register,
 );
 
-// signin route
-userRoutes.post(
-  '/signin',
-  DoValidation.email,
-  DoValidation.password,
-  UserController.signin,
-);
-
 export default userRoutes;

@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import userRoutes from './api/user';
-import propertyRoutes from './api/property';
+
 
 const routes = Router();
 
@@ -10,5 +10,6 @@ routes.get('/', (req, res) => {
     message: 'Welcome to Propertypro--Lite API',
   });
 });
-routes.use('/auth/', userRoutes);
+routes.use('/auth', userRoutes);
+
 export default routes;
