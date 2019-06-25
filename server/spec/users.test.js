@@ -159,3 +159,59 @@ describe('POST/auth signup', () => {
       });
   });
 });
+
+// Signin Test
+describe('POST/auth signin', () => {
+  const signinUrl = '/api/v1/auth/signin';
+  it('should signin an existing user(Agent)', (done) => {
+    chai.request(app)
+      .post(signinUrl)
+      .send({
+        email: 'nairobi@gmail.com',
+        password: 'nollywood10',
+      })
+      .end((err, res) => {
+        expect(res.body.status).to.equal(200);
+        done();
+      });
+  });
+
+  it('should signin an existing user(client)', (done) => {
+    chai.request(app)
+      .post(signinUrl)
+      .send({
+        email: 'johndum@gmail.com',
+        password: 'nollywood10',
+      })
+      .end((err, res) => {
+        expect(res.body.status).to.equal(200);
+        done();
+      });
+  });
+
+  it('should not signin an unregistered user', (done) => {
+    chai.request(app)
+      .post(signinUrl)
+      .send({
+        email: 'lolzing@gmail.com',
+        password: 'lolzing',
+      })
+      .end((err, res) => {
+        expect(res.body.status).to.equal(400);
+        done();
+      });
+  });
+
+  it('should not signin an invalid password', (done) => {
+    chai.request(app)
+      .post(signinUrl)
+      .send({
+        email: 'nairobi@gmail.com',
+        password: 'wrongpass',
+      })
+      .end((err, res) => {
+        expect(res.body.status).to.equal(400);
+        done();
+      });
+  });
+});
