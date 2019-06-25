@@ -109,7 +109,7 @@ class PropertyController {
       if (!getProperty) {
         return response.errorResponse(res, 401, 'error', 'You are not authorized to delete this property');
       }
-      delete properties[parseInt(propertyId) - 1];
+      properties.splice([parseInt(propertyId) - 1], 1);
       return response.successResponse(res, 200, 'success', { message: 'Property deleted successfully.'});
     } catch (error) {
       return response.errorResponse(res, 500, 'error', 'Server error');
