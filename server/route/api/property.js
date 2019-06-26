@@ -17,7 +17,9 @@ propertyRoutes.post('/',
   AuthMiddleware.checkIfUserIsAuthenticated,
   AuthMiddleware.checkUserById,
   AccountValidation.agentChecker,
+  DoValidation.type,
   DoValidation.address,
+  DoValidation.price,
   UploadingImage.uploadFile,
   PropertyController.postProperty);
 export default propertyRoutes;

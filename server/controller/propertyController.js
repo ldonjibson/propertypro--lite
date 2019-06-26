@@ -23,19 +23,19 @@ class PropertyController {
     */
   static async postProperty(req, res) {
     const {
-      body: { status, type, state, city, address, price, imageUrl },
+      body: { type, state, city, address, amount, imageUrl },
       userDetails: { id: userid },
     } = req;
+    const price = await parseFloat(amount).toFixed(2);
     try {
-      const [id, created_on, owner, image_url] = [properties.length + 1, Date.now(), userid, imageUrl];
+      const [id, created_on, status, owner, image_url] = [properties.length + 1, Date.now(), 'available', userid, imageUrl];
       const newProperty = { id, owner, status, type, state, city, address, price, created_on, image_url };
       newProperty.address = address.trim();
       properties.push(newProperty);
-      return response(res, 201, 'Successfully posted a new property', newProperty)      
+      return response.successResponse(res, 201, 'success', newProperty);
     } catch (error) {
-      return response(res, 500, 'Server error');
+      return response.errorResponse(res, 500, 'error', 'Server error');
     }
   }
-
 }
 export default PropertyController;

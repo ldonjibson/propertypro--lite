@@ -19,18 +19,18 @@ class AuthMiddleware {
     try {
       const { authorization } = req.headers || req.params || req.body;
       if (!authorization) {
-        return response(res, 401, 'You are not signed in.');
+        return response.errorResponse(res, 401, 'error', 'You are not signed in.');
       }
       const token = authorization;
       const decoded = await users.find(user => user.token === token);
-      if (decoded) {
-        req.userDetails = decoded;
-        return next();
+      if (!decoded) {
+        return response.errorResponse(res, 401, 'error', 'You are not signed in.');
       }
+      req.userDetails = decoded;
     } catch (error) {
-      return response(res, 401, 'You are not signed in.');
+      return response.errorResponse(res, 500, 'error', 'Server error');
     }
-    return response(res, 500, 'An error occured on the server');
+    return next();
   }
 
 
@@ -46,10 +46,10 @@ class AuthMiddleware {
     try {
       const userDetails = await users.find(user => user.id === req.userDetails.id);
       if (!userDetails) {
-        return response(res, 404, 'User account not found');
+        return response.errorResponse(res, 404, 'error', 'User account not found');
       }
     } catch (error) {
-      return response(res, 500, 'Server error');
+      return response.errorResponse(res, 500, 'error', 'Server error');
     }
     return next();
   }

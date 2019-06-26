@@ -9,12 +9,30 @@
  * @returns {object} Json response
  */
 
-const response = (res, code, message, payload) => {
-  res.status(code).json({
-    status: code,
-    message,
-    data: payload,
-  });
-};
+class response {
+  /**
+    * @static postProperty
+    * @description Allow a user to Create Property
+    * @param {object} res - Response object
+    * @param {number} code response code
+    * @param {object} payload response code
+    * @returns {object} Json
+    * @memberof PropertyController
+    */
+  static async successResponse(res, code, message, payload) {
+    res.status(code).json({
+      status: message,
+      data: payload,
+    });
+  }
+
+  static async errorResponse(res, code, message, payload) {
+    res.status(code).json({
+      status: message,
+      error: payload,
+    });
+  }
+
+}
 
 export default response;
