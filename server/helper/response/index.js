@@ -11,13 +11,13 @@
 
 class response {
   /**
-    * @static postProperty
-    * @description Allow a user to Create Property
+    * @static successResponse
+    * @description returns success responses
     * @param {object} res - Response object
     * @param {number} code response code
     * @param {object} payload response code
     * @returns {object} Json
-    * @memberof PropertyController
+    * @memberof response
     */
   static async successResponse(res, code, message, payload) {
     res.status(code).json({
@@ -26,6 +26,15 @@ class response {
     });
   }
 
+  /**
+    * @static errorResponse
+    * @description returns error responses
+    * @param {object} res - Response object
+    * @param {number} code response code
+    * @param {object} payload response code
+    * @returns {object} Json
+    * @memberof response
+    */
   static async errorResponse(res, code, message, payload) {
     res.status(code).json({
       status: message,

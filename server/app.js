@@ -4,6 +4,7 @@ import path from 'path';
 import bodyparser from 'body-parser';
 import cors from 'cors';
 import fileUpload from 'express-fileupload';
+
 import routes from './route/index';
 
 const app = express();
