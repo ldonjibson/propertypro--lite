@@ -54,10 +54,17 @@ class DoValidation {
   }
 
   static id(req, res, next) {
-    const { id } = req.params;
+    const { id, propertyId } = req.params;
     const validate = RegularExpression.validate();
-    if (!validate.accountNumber.test(id)) {
-      return response.errorResponse(res, 400, 'error', ValidationMessages.id);
+    if (id) {
+      if (!validate.phoneNumber.test(id)) {
+        return response.errorResponse(res, 400, 'error', ValidationMessages.Id);
+      }
+    }
+    if (propertyId) {
+      if (!validate.phoneNumber.test(propertyId)) {
+        return response.errorResponse(res, 400, 'error', ValidationMessages.Id);
+      }
     }
     return next();
   }

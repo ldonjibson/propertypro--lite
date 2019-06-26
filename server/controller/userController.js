@@ -26,7 +26,7 @@ class UserController {
       const hashPassword = await PasswordManager.hashPassword(password);
       const userDetails = await users.find(user => user.email === email);
       if (userDetails) {
-        return response.errorResponse(res, 409, 'Email already in use');
+        return response.errorResponse(res, 409, 'error', 'Email already in use');
       }
       let id; let isAdmin; let createdOn; let token;
       [token, id, isAdmin, createdOn, password] = [`45erkjherht4549${Math.floor(Math.random() * 10000)}`, users.length + 1, false, Date.now(), hashPassword ];
@@ -53,14 +53,14 @@ class UserController {
     try {
       userDetails = await users.find(user => user.email === email);
       if (!userDetails) {
-        return response.errorResponse(res, 400, 'error', 'User doesn\'t exist');
+        return response.errorResponse(res, 404, 'error', 'User doesn\'t exist');
       }
       isPasswordValid = PasswordManager.verifyPassword(password, userDetails.password);
       if (!isPasswordValid) {
         return response.errorResponse(res, 400, 'error', 'Incorrect Password or Email');
       }
     } catch (error) {
-      return response.errorResponse(res, 500, 'Server error');
+      return response.errorResponse(res, 500, 'error', 'Server error');
     }
     delete userDetails.password;
     if (isPasswordValid) {
