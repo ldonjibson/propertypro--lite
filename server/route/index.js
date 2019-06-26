@@ -11,4 +11,5 @@ routes.get('/', (req, res) => {
   });
 });
 routes.use('/auth/', userRoutes);
+routes.use('/property', propertyRoutes);
 export default routes;

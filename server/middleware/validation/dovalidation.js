@@ -78,6 +78,23 @@ class DoValidation {
     return next();
   }
 
+  static price(req, res, next) {
+    const { amount } = req.body;
+    const validate = RegularExpression.validate();
+    if (!validate.price.test(amount)) {
+      return response.errorResponse(res, 400, 'error', ValidationMessages.price);
+    }
+    return next();
+  }
+
+  static type(req, res, next) {
+    const { type } = req.body;
+    if (!type) {
+      return response.errorResponse(res, 400, 'error', ValidationMessages.type);
+    }
+    return next();
+  }
+
   static isAdmin(req, res, next) {
     const { isAdmin } = req.body;
     const validate = RegularExpression.validate();
@@ -102,6 +119,15 @@ class DoValidation {
     // if (!validate.address.test(address.trim())) {
     //   return response.errorResponse(res, 400, 'error', ValidationMessages.address);
     // }
+    return next();
+  }
+
+  static status(req, res, next) {
+    const { status } = req.body;
+    const validate = RegularExpression.validate();
+    if (!validate.status.test(status)) {
+      return response.errorResponse(res, 400, 'error', ValidationMessages.status);
+    }
     return next();
   }
 }

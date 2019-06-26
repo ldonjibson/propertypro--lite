@@ -30,7 +30,7 @@ class UserController {
       }
       let id; let isAdmin; let createdOn; let token;
       [token, id, isAdmin, createdOn, password] = [`45erkjherht4549${Math.floor(Math.random() * 10000)}`, users.length + 1, false, Date.now(), hashPassword ];
-      newUser = { token, id, firstName, lastName, email, password, phoneNumber, address, accountType, isAdmin, createdOn}     
+      newUser = { token, id, firstName, lastName, email, password, phoneNumber, address, accountType, isAdmin, createdOn };
       users.push(newUser);
     } catch (error) {
       return response.errorResponse(res, 500, 'error', 'Server error');
