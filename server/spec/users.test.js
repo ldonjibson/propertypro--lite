@@ -94,7 +94,6 @@ describe('POST/auth signup', () => {
       .post(signupUrl)
       .send({
         firstName: 'sergio',
-        lastName: 'Maquiness',
         email: 'professor@gmail.com',
         password: 'professor',
         phoneNumber: '2348181384092',
