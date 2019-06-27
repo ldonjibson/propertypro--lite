@@ -22,8 +22,7 @@ describe('POST/auth signup', () => {
       .end((err, res) => {
         expect(res.body).to.be.an('object');
         expect(res).to.have.status(201);
-        expect(res.body.status).to.equal(201);
-        expect(res.body.message).to.equal('Successfully created a new user account');
+        expect(res.body.status).to.equal('success');
         expect(res.body.data).to.be.a('object');
         expect(res.body.data).to.have.property('token');
         expect(res.body.data).to.have.property('id');
@@ -31,7 +30,7 @@ describe('POST/auth signup', () => {
         expect(res.body.data).to.have.property('lastName');
         expect(res.body.data).to.have.property('email');
         expect(res.body.data.token).to.be.a('string');
-        expect(res.body.data.email).to.equal('chinosojude@gmail.com');
+        expect(res.body.data.email).to.equal('oslo@gmail.com');
         done();
       });
   });
@@ -48,8 +47,8 @@ describe('POST/auth signup', () => {
       })
       .end((err, res) => {
         expect(res.body).to.be.an('object');
-        expect(res.body.status).to.equal(409);
-        expect(res.body.message).to.equal('Email already in use');
+        expect(res.body.status).to.equal('error');
+        expect(res.body.error).to.equal('Email already in use');
         done();
       });
   });
@@ -65,8 +64,8 @@ describe('POST/auth signup', () => {
       })
       .end((err, res) => {
         expect(res.body).to.be.an('object');
-        expect(res.body.status).to.equal(400);
-        expect(res.body.message).to.equal('Enter a valid email.');
+        expect(res.body.status).to.equal('error');
+        expect(res.body.error).to.equal('Enter a valid email.');
         done();
       });
   });
@@ -84,8 +83,9 @@ describe('POST/auth signup', () => {
       .send(user)
       .end((err, res) => {
         expect(res.body).to.be.an('object');
-        expect(res.body.status).to.equal(400);
-        expect(res.body.message).to.equal('Enter a valid firstName.');
+        expect(res.body.status).to.equal('error');
+        expect(res.body.error).to.equal('Enter a valid firstName.');
+        expect(res.statusCode).to.equal(400);
         done();
       });
   });
@@ -102,8 +102,9 @@ describe('POST/auth signup', () => {
       })
       .end((err, res) => {
         expect(res.body).to.be.an('object');
-        expect(res.body.status).to.equal(400);
-        expect(res.body.message).to.equal('Enter a valid lastName.');
+        expect(res.statusCode).to.equal(400);
+        expect(res.body.status).to.equal('error');
+        expect(res.body.error).to.equal('Enter a valid lastName.');
         done();
       });
   });
@@ -119,8 +120,9 @@ describe('POST/auth signup', () => {
       })
       .end((err, res) => {
         expect(res.body).to.be.an('object');
-        expect(res.body.status).to.equal(400);
-        expect(res.body.message).to.equal('Enter a password with at least 8 characters.');
+        expect(res.body.status).to.equal('error');
+        expect(res.statusCode).to.equal(400);
+        expect(res.body.error).to.equal('Enter a password with at least 8 characters.');
         done();
       });
   });
@@ -136,8 +138,9 @@ describe('POST/auth signup', () => {
       })
       .end((err, res) => {
         expect(res.body).to.be.an('object');
-        expect(res.body.status).to.equal(400);
-        expect(res.body.message).to.equal('Enter a valid Phone Number');
+        expect(res.body.status).to.equal('error');
+        expect(res.statusCode).to.equal(400);
+        expect(res.body.error).to.equal('Enter a valid Phone Number');
         done();
       });
   });
@@ -153,8 +156,9 @@ describe('POST/auth signup', () => {
       })
       .end((err, res) => {
         expect(res.body).to.be.an('object');
-        expect(res.body.status).to.equal(400);
-        expect(res.body.message).to.equal('account type can only be agent and client');
+        expect(res.body.status).to.equal('error');
+        expect(res.statusCode).to.equal(400);
+        expect(res.body.error).to.equal('account type can only be agent and client');
         done();
       });
   });
