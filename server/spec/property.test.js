@@ -418,7 +418,7 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
 
     it('should not delete a property if paramater is invalid ', (done) => {
       chai.request(app)
-        .patch('/api/v1/property/g')
+        .delete('/api/v1/property/g')
         .set('authorization', userToken2)
         .end((err, res) => {
           expect(res.body.status).to.equal('error');
