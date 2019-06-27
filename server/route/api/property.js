@@ -17,7 +17,9 @@ propertyRoutes.post('/',
   AuthMiddleware.checkIfUserIsAuthenticated,
   AuthMiddleware.checkUserById,
   AccountValidation.agentChecker,
+  DoValidation.type,
   DoValidation.address,
+  DoValidation.price,
   UploadingImage.uploadFile,
   PropertyController.postProperty);
 
@@ -26,7 +28,9 @@ propertyRoutes.patch('/:propertyId',
   AuthMiddleware.checkIfUserIsAuthenticated,
   AuthMiddleware.checkUserById,
   AccountValidation.agentChecker,
+  DoValidation.type,
   DoValidation.address,
+  DoValidation.price,
   UploadingImage.uploadFile,
   PropertyController.updateProperty);
 
@@ -38,15 +42,9 @@ propertyRoutes.patch('/:propertyId/sold',
   PropertyController.updateStatusProperty);
 
 propertyRoutes.delete('/:propertyId',
+  DoValidation.id,
   AuthMiddleware.checkIfUserIsAuthenticated,
   AuthMiddleware.checkUserById,
   AccountValidation.agentChecker,
   PropertyController.deleteProperty);
-
-// propertyRoutes.get('/',
-//   PropertyController.listProperties);
-
-// propertyRoutes.get('/:propertyId',
-//   DoValidation.id,
-//   PropertyController.specificPropertyDetail);
 export default propertyRoutes;
