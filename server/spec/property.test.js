@@ -381,6 +381,7 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
         });
     });
   });
+
   describe('DELETE /api/v1/property/:propertyId', () => {
     it('should delete a property', (done) => {
       chai.request(app)

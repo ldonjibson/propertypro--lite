@@ -1,4 +1,3 @@
-/* eslint-disable radix */
 /* eslint-disable object-curly-newline */
 /* eslint-disable max-len */
 
