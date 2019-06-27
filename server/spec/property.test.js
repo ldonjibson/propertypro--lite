@@ -148,6 +148,26 @@ describe('POST /api/v1/property', () => {
       });
   });
 
+  it('should not post property if image is missing', (done) => {
+    const create = {
+      type: 'mini flat',
+      state: 'lagos state',
+      city: 'lagos',
+      address: '2,owodunit street',
+      amount: 400000,
+    };
+    chai.request(app)
+      .post('/api/v1/property')
+      .set('authorization', userToken)
+      .send(create)
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(400);
+        expect(res.body.status).to.equal('error');
+        expect(res.body.error).to.equal('Please upload an image.');
+        done();
+      });
+  });
+
   it('should not post property for an invalid token', (done) => {
     chai.request(app)
       .post('/api/v1/property')
