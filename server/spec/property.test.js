@@ -441,5 +441,28 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
         });
       done();
     });
+
+    describe('GET /api/v1/property/:propertyId', () => {
+      it('should get details of a specific property', (done) => {
+        chai.request(app)
+          .get('/api/v1/property/4')
+          .end((err, res) => {
+            expect(res.body.status).to.equal('success');
+            expect(res.body.data).to.be.an('object');
+            expect(res.statusCode).to.equal(200);
+          });
+        done();
+      });
+
+      it('should not get details of a specific property for invalid id', (done) => {
+        chai.request(app)
+          .get('/api/v1/property/g')
+          .end((err, res) => {
+            expect(res.body.status).to.equal('error');
+            expect(res.statusCode).to.equal(400);
+          });
+        done();
+      });
+    });
   });
 });
