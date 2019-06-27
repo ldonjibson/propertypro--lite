@@ -59,14 +59,11 @@ class UserController {
       if (!isPasswordValid) {
         return response.errorResponse(res, 400, 'error', 'Incorrect Password or Email');
       }
+      delete userDetails.password;
+      return response.successResponse(res, 200, 'success', userDetails);
     } catch (error) {
       return response.errorResponse(res, 500, 'error', 'Server error');
     }
-    delete userDetails.password;
-    if (isPasswordValid) {
-      return response.successResponse(res, 200, 'success', userDetails);
-    }
-    return response.errorResponse(res, 400, 'error', 'Invalid Password or Email');
   }
 }
 

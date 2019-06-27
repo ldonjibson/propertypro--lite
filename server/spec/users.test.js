@@ -171,7 +171,10 @@ describe('POST/auth signin', () => {
         password: 'nollywood10',
       })
       .end((err, res) => {
-        expect(res.body.status).to.equal(200);
+        expect(res.body.status).to.equal('success');
+        expect(res.statusCode).to.equal(200);
+        expect(res.body.data).to.be.an('object');
+        expect(res.body.data).to.have.property('token');
         done();
       });
   });
@@ -184,7 +187,10 @@ describe('POST/auth signin', () => {
         password: 'nollywood10',
       })
       .end((err, res) => {
-        expect(res.body.status).to.equal(200);
+        expect(res.body.status).to.equal('success');
+        expect(res.statusCode).to.equal(200);
+        expect(res.body.data).to.be.an('object');
+        expect(res.body.data).to.have.property('token');
         done();
       });
   });
@@ -197,7 +203,10 @@ describe('POST/auth signin', () => {
         password: 'lolzing',
       })
       .end((err, res) => {
-        expect(res.body.status).to.equal(400);
+        expect(res.body.status).to.equal('error');
+        expect(res.statusCode).to.equal(404);
+        expect(res.body).to.be.an('object');
+        expect(res.body.error).to.equal('User doesn\'t exist');
         done();
       });
   });
@@ -210,7 +219,10 @@ describe('POST/auth signin', () => {
         password: 'wrongpass',
       })
       .end((err, res) => {
-        expect(res.body.status).to.equal(400);
+        expect(res.body.status).to.equal('error');
+        expect(res.statusCode).to.equal(400);
+        expect(res.body).to.be.an('object');
+        expect(res.body.error).to.equal('Incorrect Password or Email');
         done();
       });
   });
