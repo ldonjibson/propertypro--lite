@@ -186,38 +186,6 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
   });
 
   describe('PATCH /api/v1/property/<:property-id>', () => {
-    // const user = {
-    //   email: 'nairobi@gmail.com',
-    //   password: 'nollywood10',
-    // };
-    // const user2 = {
-    //   email: 'MarkRio@gmail.com',
-    //   password: 'nollywood10',
-    // };
-    
-    // let userToken;
-    // before((done) => {
-    //   chai.request(app)
-    //     .post('/api/v1/auth/signin')
-    //     .send(user)
-    //     .end((err, res) => {
-    //       console.log(res.body)
-    //       userToken = res.body.data.token;
-    //       done();
-    //     });
-    // });
-
-    // let userToken2;
-    // before((done) => {
-    //   chai.request(app)
-    //     .post('/api/v1/auth/signin')
-    //     .send(user2)
-    //     .end((err, res) => {
-    //       userToken2 = res.body.data.token;
-    //       done();
-    //     });
-    // });
-
     it('should successfully update a specific property', (done) => {
       chai.request(app)
         .patch('/api/v1/property/3')

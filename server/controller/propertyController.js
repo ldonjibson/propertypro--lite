@@ -65,5 +65,6 @@ class PropertyController {
       return response.errorResponse(res, 500, 'error', 'Server error');
     }
   }
+
 }
 export default PropertyController;
