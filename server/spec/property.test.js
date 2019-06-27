@@ -333,4 +333,52 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
         });
     });
   });
+
+  describe('POST /api/v1/property/:propertyId/sold', () => {
+    it('should update status of a property', (done) => {
+      // try {/
+      chai.request(app)
+        .patch('/api/v1/property/3/sold')
+        .set('authorization', userToken)
+        .end((err, res) => {
+          expect(res.body.status).to.equal('success');
+          expect(res.body.data.status).to.equal('sold');
+          expect(res.statusCode).to.equal(201);
+        });
+      done();
+    });
+
+    it('should not update status if token is invalid ', (done) => {
+      chai.request(app)
+        .patch('/api/v1/property/3/sold')
+        .set('authorization', 'invalidtoken12343')
+        .end((err, res) => {
+          expect(res.body.status).to.equal('error');
+          expect(res.body.error).to.equal('You are not signed in.');
+          done();
+        });
+    });
+
+    it('should not update status if user is not an agent ', (done) => {
+      chai.request(app)
+        .patch('/api/v1/property/3/sold')
+        .set('authorization', userToken2)
+        .end((err, res) => {
+          expect(res.body.status).to.equal('error');
+          expect(res.body.error).to.equal('Unauthorized');
+          done();
+        });
+    });
+
+    it('should not update status if paramater is invalid ', (done) => {
+      chai.request(app)
+        .patch('/api/v1/property/g/sold')
+        .set('authorization', userToken2)
+        .end((err, res) => {
+          expect(res.body.status).to.equal('error');
+          expect(res.body.error).to.equal('Invalid id, id must be a number');
+          done();
+        });
+    });
+  });
 });

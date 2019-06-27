@@ -66,5 +66,29 @@ class PropertyController {
     }
   }
 
+  /**
+    * @static updateStatusProperty
+    * @description Allow a user to Update StatusProperty
+    * @param {object} req - Request object
+    * @param {object} res - Response object
+    * @returns {object} Json
+    * @memberof PropertyController
+    */
+  static async updateStatusProperty(req, res) {
+    const {
+      userDetails: { id: userid },
+      params: { propertyId },
+    } = req;
+    try {
+      const getProperty = await properties.find(property => property.id === parseInt(propertyId) && property.owner === parseInt(userid));
+      if (!getProperty) {
+        return response.errorResponse(res, 401, 'error', 'You are not authorized to edit this property');
+      }
+      getProperty.status = 'sold';
+      return response.successResponse(res, 201, 'success', getProperty);
+    } catch (error) {
+      return response.errorResponse(res, 500, 'error', 'Server error');
+    }
+  }
 }
 export default PropertyController;

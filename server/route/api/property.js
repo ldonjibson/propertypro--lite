@@ -33,4 +33,11 @@ propertyRoutes.patch('/:propertyId',
   DoValidation.price,
   UploadingImage.uploadFile,
   PropertyController.updateProperty);
+
+propertyRoutes.patch('/:propertyId/sold',
+  DoValidation.id,
+  AuthMiddleware.checkIfUserIsAuthenticated,
+  AuthMiddleware.checkUserById,
+  AccountValidation.agentChecker,
+  PropertyController.updateStatusProperty);
 export default propertyRoutes;
