@@ -29,11 +29,12 @@ class UploadingImage {
       }
       await cloudinary.uploader.upload(image.tempFilePath, (results) => {
         req.body.imageUrl = results.url;
+        console.log(req.body.imageUrl);
       });
+      return next();
     } catch (error) {
-      return response.errorResponse(res, 409, 'error', 'error uploading image');
+      return response.errorResponse(res, 500, 'error', 'Server error');
     }
-    return next();
   }
 }
 
