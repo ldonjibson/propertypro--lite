@@ -53,7 +53,7 @@ class UserController {
     try {
       userDetails = await users.find(user => user.email === email);
       if (!userDetails) {
-        return response.errorResponse(res, 404, 'error', 'User doesn\'t exist');
+        return response.errorResponse(res, 400, 'error', 'User doesn\'t exist');
       }
       isPasswordValid = PasswordManager.verifyPassword(password, userDetails.password);
       if (!isPasswordValid) {

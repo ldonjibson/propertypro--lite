@@ -37,5 +37,34 @@ class PropertyController {
       return response.errorResponse(res, 500, 'error', 'Server error');
     }
   }
+
+  /**
+    * @static updateProperty
+    * @description Allow a user to Update Property
+    * @param {object} req - Request object
+    * @param {object} res - Response object
+    * @returns {object} Json
+    * @memberof PropertyController
+    */
+  static async updateProperty(req, res) {
+    const {
+      body: { type, state, city, address, price, imageUrl },
+      userDetails: { id: userid },
+      params: { propertyId },
+    } = req;
+    try {
+      let getProperty = await properties.find(property => property.id === parseInt(propertyId) && property.owner === parseInt(userid));
+      if (!getProperty) {
+        return response.errorResponse(res, 401, 'error', 'You are not authorized to edit this property')
+      }
+      getProperty.address = address.trim();
+      const [id, status, owner] = [propertyId, getProperty.status, userid];
+      getProperty = { id, owner, status, type, city, state, address, price, imageUrl };
+      return response.successResponse(res, 201, 'success', getProperty);
+    } catch (error) {
+      return response.errorResponse(res, 500, 'error', 'Server error');
+    }
+  }
+
 }
 export default PropertyController;
