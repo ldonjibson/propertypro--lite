@@ -29,7 +29,6 @@ class UploadingImage {
       }
       await cloudinary.uploader.upload(image.tempFilePath, (results) => {
         req.body.imageUrl = results.url;
-        console.log(req.body.imageUrl);
       });
       return next();
     } catch (error) {
