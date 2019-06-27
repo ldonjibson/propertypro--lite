@@ -40,4 +40,11 @@ propertyRoutes.patch('/:propertyId/sold',
   AuthMiddleware.checkUserById,
   AccountValidation.agentChecker,
   PropertyController.updateStatusProperty);
+
+propertyRoutes.delete('/:propertyId',
+  DoValidation.id,
+  AuthMiddleware.checkIfUserIsAuthenticated,
+  AuthMiddleware.checkUserById,
+  AccountValidation.agentChecker,
+  PropertyController.deleteProperty);
 export default propertyRoutes;

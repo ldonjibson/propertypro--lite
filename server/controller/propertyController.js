@@ -90,5 +90,30 @@ class PropertyController {
       return response.errorResponse(res, 500, 'error', 'Server error');
     }
   }
+
+  /**
+    * @static deleteProperty
+    * @description Allow a agent to delete Property
+    * @param {object} req - Request object
+    * @param {object} res - Response object
+    * @returns {object} Json
+    * @memberof PropertyController
+    */
+  static async deleteProperty(req, res) {
+    const {
+      userDetails: { id: userid },
+      params: { propertyId },
+    } = req;
+    try {
+      const getProperty = await properties.find(property => property.id === parseInt(propertyId) && property.owner === parseInt(userid));
+      if (!getProperty) {
+        return response.errorResponse(res, 401, 'error', 'You are not authorized to delete this property');
+      }
+      properties.splice([parseInt(propertyId) - 1], 1);
+      return response.successResponse(res, 200, 'success', { message: 'Property deleted successfully.'});
+    } catch (error) {
+      return response.errorResponse(res, 500, 'error', 'Server error');
+    }
+  }
 }
 export default PropertyController;

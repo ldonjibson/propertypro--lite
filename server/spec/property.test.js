@@ -334,7 +334,7 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
     });
   });
 
-  describe('POST /api/v1/property/:propertyId/sold', () => {
+  describe('PATCH /api/v1/property/:propertyId/sold', () => {
     it('should update status of a property', (done) => {
       // try {/
       chai.request(app)
@@ -373,6 +373,53 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
     it('should not update status if paramater is invalid ', (done) => {
       chai.request(app)
         .patch('/api/v1/property/g/sold')
+        .set('authorization', userToken2)
+        .end((err, res) => {
+          expect(res.body.status).to.equal('error');
+          expect(res.body.error).to.equal('Invalid id, id must be a number');
+          done();
+        });
+    });
+  });
+
+  describe('DELETE /api/v1/property/:propertyId', () => {
+    it('should delete a property', (done) => {
+      chai.request(app)
+        .delete('/api/v1/property/3')
+        .set('authorization', userToken)
+        .end((err, res) => {
+          expect(res.body.status).to.equal('success');
+          expect(res.body.data.message).to.equal('Property deleted successfully.');
+          expect(res.statusCode).to.equal(200);
+        });
+      done();
+    });
+
+    it('should not delete a property if token is invalid ', (done) => {
+      chai.request(app)
+        .delete('/api/v1/property/3')
+        .set('authorization', 'invalidtoken12343')
+        .end((err, res) => {
+          expect(res.body.status).to.equal('error');
+          expect(res.body.error).to.equal('You are not signed in.');
+          done();
+        });
+    });
+
+    it('should not delete a property if user is not an agent ', (done) => {
+      chai.request(app)
+        .delete('/api/v1/property/3')
+        .set('authorization', userToken2)
+        .end((err, res) => {
+          expect(res.body.status).to.equal('error');
+          expect(res.body.error).to.equal('Unauthorized');
+          done();
+        });
+    });
+
+    it('should not delete a property if paramater is invalid ', (done) => {
+      chai.request(app)
+        .delete('/api/v1/property/g')
         .set('authorization', userToken2)
         .end((err, res) => {
           expect(res.body.status).to.equal('error');
