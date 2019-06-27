@@ -428,4 +428,18 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
         });
     });
   });
+
+  describe('GET /api/v1/property', () => {
+    it('should list all properties and types', (done) => {
+      chai.request(app)
+        .get('/api/v1/property')
+        .end((err, res) => {
+          expect(res.body.status).to.equal('success');
+          expect(res.body.data).to.be.an('array');
+          expect(res.body.data[0]).to.be.an('object');
+          expect(res.statusCode).to.equal(200);
+        });
+      done();
+    });
+  });
 });
