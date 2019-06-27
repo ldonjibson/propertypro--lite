@@ -60,7 +60,7 @@ class UserController {
         return response.errorResponse(res, 400, 'error', 'Incorrect Password or Email');
       }
     } catch (error) {
-      return response.errorResponse(res, 500, 'Server error');
+      return response.errorResponse(res, 500, 'error', 'Server error');
     }
     delete userDetails.password;
     if (isPasswordValid) {

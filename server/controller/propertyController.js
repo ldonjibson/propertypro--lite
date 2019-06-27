@@ -52,7 +52,6 @@ class PropertyController {
       userDetails: { id: userid },
       params: { propertyId },
     } = req;
-    console.log(userid, propertyId);
     try {
       let getProperty = await properties.find(property => property.id === parseInt(propertyId) && property.owner === parseInt(userid));
       if (!getProperty) {
