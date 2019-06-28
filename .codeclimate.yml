@@ -12,6 +12,9 @@ engines:
 ratings:
   paths:
   - "server/**.js"
-exclude_paths:
-- spec
-- node_modules
+exclude_patterns:
+- "spec/"
+- "node_modules/"
+- "coverage/"
+- ".nyc_output/"
+- "UI/"
