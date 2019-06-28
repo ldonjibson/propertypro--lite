@@ -167,7 +167,7 @@ describe('POST/auth signin', () => {
     chai.request(app)
       .post(signinUrl)
       .send({
-        email: 'nairobi@gmail.com',
+        email: 'ajibolahussain@gmail.com',
         password: 'nollywood10',
       })
       .end((err, res) => {
