@@ -18,3 +18,4 @@ exclude_patterns:
 - "coverage/"
 - ".nyc_output/"
 - "UI/"
+- "server/model"
