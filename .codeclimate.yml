@@ -13,7 +13,7 @@ ratings:
   paths:
   - "server/**.js"
 exclude_patterns:
-- "spec/"
+- "server/spec/"
 - "node_modules/"
 - "coverage/"
 - ".nyc_output/"
