@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.com/ldonjibson/propertypro--lite.svg?branch=develop)](https://travis-ci.com/ldonjibson/propertypro--lite) [![Maintainability](https://api.codeclimate.com/v1/badges/f355611c0abcaf01dab2/maintainability)](https://codeclimate.com/github/ldonjibson/propertypro--lite/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/f355611c0abcaf01dab2/test_coverage)](https://codeclimate.com/github/ldonjibson/propertypro--lite/test_coverage) [![Coverage Status](https://coveralls.io/repos/github/ldonjibson/propertypro--lite/badge.svg?branch=develop)](https://coveralls.io/github/ldonjibson/propertypro--lite?branch=develop) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-# Banka
+# PropertyLite
 
 ## Table of Contents
 
@@ -26,15 +26,15 @@ To get started with this project you need a basic knowledge of :
 
 - ### Useful Links
 ## Screenshot(UI template)
-![alt](./homepage.png)
+![alt](./screenShot/home-page.jpg)
 
 Preview UI templates : [Github Pages](https://ldonjibson.github.io/propertypro--lite/)
 
 View Project Management: [Pivotal Tracker](https://www.pivotaltracker.com/n/projects/2355063)
 
-Hosted on Heroku: [Heroku](https://bankaapp.herokuapp.com/api/v1)
+Hosted on Heroku: [Heroku](https://propertypro--lite.herokuapp.com/api/v1)
 
-API Documentation: [Swagger](https://bankaapp.herokuapp.com/swagger)
+API Documentation: [Swagger](https://propertypro--lite.herokuapp.com/swagger)
 
 - ### Technology Stack
 1. HTML & CSS
@@ -96,8 +96,7 @@ npm run test
 |/api/v1/property/*property-id*/sold                    |Agent can update the status posted property advert to sold |PATCH
 |/api/v1/property                    |Get all  property advert |GET
 |/api/v1/property/?type=*propertyType*                    |Get all property advertisement offering a specific type of property. |GET
-|/api/v1/property/*property-id*                    |View a specific property advert.
- |GET
+|/api/v1/property/*property-id*                    |View a specific property advert. |GET
 
 ## Acknowledgments :
 
