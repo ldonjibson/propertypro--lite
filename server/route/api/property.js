@@ -50,4 +50,8 @@ propertyRoutes.delete('/:propertyId',
 
 propertyRoutes.get('/',
   PropertyController.listProperties);
+
+propertyRoutes.get('/:propertyId',
+  DoValidation.id,
+  PropertyController.specificPropertyDetail);
 export default propertyRoutes;

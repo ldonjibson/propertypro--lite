@@ -442,4 +442,50 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
       done();
     });
   });
+
+  describe('GET /api/v1/property/:propertyId', () => {
+    it('should get details of a specific property', (done) => {
+      chai.request(app)
+        .get('/api/v1/property/4')
+        .end((err, res) => {
+          expect(res.body.status).to.equal('success');
+          expect(res.body.data).to.be.an('object');
+          expect(res.statusCode).to.equal(200);
+        });
+      done();
+    });
+
+    it('should not get details of a specific property for invalid id', (done) => {
+      chai.request(app)
+        .get('/api/v1/property/g')
+        .end((err, res) => {
+          expect(res.body.status).to.equal('error');
+          expect(res.statusCode).to.equal(400);
+        });
+      done();
+    });
+  });
+  describe('GET /api/v1/property/?type=PropertyType', () => {
+    it('should get specific type of properties', (done) => {
+      chai.request(app)
+        .get('/api/v1/property/?type=2 bed room')
+        .end((err, res) => {
+          expect(res.body.status).to.equal('success');
+          expect(res.body.data).to.be.an('array');
+          expect(res.body.data[0]).to.be.an('object');
+          expect(res.statusCode).to.equal(200);
+        });
+      done();
+    });
+
+    it('should not get specific type of properties for iinvalid property type', (done) => {
+      chai.request(app)
+        .get('/api/v1/property/?type=gjhssfasa')
+        .end((err, res) => {
+          expect(res.body.status).to.equal('error');
+          expect(res.statusCode).to.equal(404);
+        });
+      done();
+    });
+  });
 });

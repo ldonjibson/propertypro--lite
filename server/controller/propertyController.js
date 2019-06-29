@@ -140,7 +140,7 @@ class PropertyController {
         if (listTypeProperties.length === 0) {
           return response.errorResponse(res, 404, 'error', 'No property was found');
         }
-        return response.successResponse(res, 200, 'success', listTypeProperties);
+        return response.successResponse(res, 200, 200, listTypeProperties);
       }
       const allProperties = await properties.map((property) => {
         const getPropertyOwner = users.find(user => user.id === property.owner);
