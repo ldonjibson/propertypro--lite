@@ -26,7 +26,7 @@ To get started with this project you need a basic knowledge of :
 
 - ### Useful Links
 ## Screenshot(UI template)
-![alt](./screenShot/home-page.jpg)
+![alt](./homepage.png)
 
 Preview UI templates : [Github Pages](https://ldonjibson.github.io/propertypro--lite/)
 
