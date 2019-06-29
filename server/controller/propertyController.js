@@ -167,7 +167,7 @@ class PropertyController {
       const detailProperty = await properties.find(property => property.id === parseInt(propertyId));
       const getPropertyOwner = await users.find(user => user.id === detailProperty.owner);
       [detailProperty.ownerEmail, detailProperty.ownerPhoneNumber] = [getPropertyOwner.email , getPropertyOwner.phoneNumber];
-      return response.successResponse(res, 200, 'success', detailProperty);
+      return response.successResponse(res, 200, 200, detailProperty);
     } catch (error) {
       return response.errorResponse(res, 500, 'error', 'Server error');
     }
