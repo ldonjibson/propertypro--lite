@@ -19,3 +19,5 @@ exclude_patterns:
 - ".nyc_output/"
 - "UI/"
 - "server/model"
+- "dist/"
+- ".vscode/"
