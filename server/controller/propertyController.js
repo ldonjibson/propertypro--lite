@@ -147,7 +147,7 @@ class PropertyController {
         [property.ownerEmail, property.ownerPhoneNumber] = [getPropertyOwner.email, getPropertyOwner.phoneNumber];
         return property;
       });
-      return response.successResponse(res, 200, 'success', allProperties);
+      return response.successResponse(res, 200, 200, allProperties);
     } catch (error) {
       return response.errorResponse(res, 500, 'error', 'Server error');
     }
