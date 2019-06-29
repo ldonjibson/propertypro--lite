@@ -152,5 +152,25 @@ class PropertyController {
       return response.errorResponse(res, 500, 'error', 'Server error');
     }
   }
+
+  /**
+    * @static specificPropertyDetail
+    * @description Allow a user to view details of a specific Properties
+    * @param {object} req - Request object
+    * @param {object} res - Response object
+    * @returns {object} Json
+    * @memberof PropertyController
+    */
+  static async specificPropertyDetail(req, res) {
+    const { propertyId } = req.params;
+    try {
+      const detailProperty = await properties.find(property => property.id === parseInt(propertyId));
+      const getPropertyOwner = await users.find(user => user.id === detailProperty.owner);
+      [detailProperty.ownerEmail, detailProperty.ownerPhoneNumber] = [getPropertyOwner.email , getPropertyOwner.phoneNumber];
+      return response.successResponse(res, 200, 200, detailProperty);
+    } catch (error) {
+      return response.errorResponse(res, 500, 'error', 'Server error');
+    }
+  }
 }
 export default PropertyController;
