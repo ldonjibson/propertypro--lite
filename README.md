@@ -71,7 +71,7 @@ git clone https://github.com/ldonjibson/propertypro--lite.git
 
 - To run server,
 
-`npm run start:dev`
+`npm run start   or npm start`
 
 - Server listens on port `3001`
 
