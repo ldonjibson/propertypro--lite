@@ -334,7 +334,7 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
     });
   });
 
-  describe('PATCH /api/v1/property/:propertyId/old', () => {
+  describe('PATCH /api/v1/property/:propertyId/sold', () => {
     it('should update status of a property', (done) => {
       // try {/
       chai.request(app)
