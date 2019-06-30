@@ -57,17 +57,14 @@ class UserController {
         return response.errorResponse(res, 404, 'error', 'User doesn\'t exist');
       }
       isPasswordValid = PasswordManager.verifyPassword(password, userDetails.password);
-      if (!isPasswordValid) {
+      if (isPasswordValid === false) {
         return response.errorResponse(res, 400, 'error', 'Incorrect Password or Email');
       }
     } catch (error) {
       return response.errorResponse(res, 500, 'error', 'Server error');
     }
     delete userDetails.password;
-    if (isPasswordValid) {
-      return response.successResponse(res, 200, 'success', userDetails);
-    }
-    return response.errorResponse(res, 400, 'error', 'Invalid Password or Email');
+    return response.successResponse(res, 200, 'success', userDetails);
   }
 }
 

@@ -162,3 +162,71 @@ describe('POST/auth signup', () => {
       });
   });
 });
+
+// Signin Test
+describe('POST/auth signin', () => {
+  const signinUrl = '/api/v1/auth/signin';
+  it('should signin an existing user(Agent)', (done) => {
+    chai.request(app)
+      .post(signinUrl)
+      .send({
+        email: 'ajibolahussain@gmail.com',
+        password: 'nollywood10',
+      })
+      .end((err, res) => {
+        expect(res.body.status).to.equal('success');
+        expect(res.statusCode).to.equal(200);
+        expect(res.body.data).to.be.an('object');
+        expect(res.body.data).to.have.property('token');
+        done();
+      });
+  });
+
+  it('should signin an existing user(client)', (done) => {
+    chai.request(app)
+      .post(signinUrl)
+      .send({
+        email: 'johndum@gmail.com',
+        password: 'nollywood10',
+      })
+      .end((err, res) => {
+        expect(res.body.status).to.equal('success');
+        expect(res.statusCode).to.equal(200);
+        expect(res.body.data).to.be.an('object');
+        expect(res.body.data).to.have.property('token');
+        done();
+      });
+  });
+
+  it('should not signin an unregistered user', (done) => {
+    chai.request(app)
+      .post(signinUrl)
+      .send({
+        email: 'lolzing@gmail.com',
+        password: 'lolzing',
+      })
+      .end((err, res) => {
+        expect(res.body.status).to.equal('error');
+        expect(res.statusCode).to.equal(404);
+        expect(res.body).to.be.an('object');
+        expect(res.body.error).to.equal('User doesn\'t exist');
+        done();
+      });
+  });
+
+  it('should not signin an invalid password', (done) => {
+    chai.request(app)
+      .post(signinUrl)
+      .send({
+        email: 'Berliniike@gmail.com',
+        password: 'sfssffdfs',
+      })
+      .end((err, res) => {
+        expect(res.body.status).to.equal('error');
+        // expect(res.statusCode).to.equal(400);
+        expect(res.body).to.be.an('object');
+        expect(res.body.error).to.equal('Incorrect Password or Email');
+        done();
+      });
+  });
+});

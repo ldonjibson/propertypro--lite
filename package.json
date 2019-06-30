@@ -3,11 +3,16 @@
     "version": "1.0.0",
     "description": "Property Pro Lite is a platform where people can create and/or search properties for sale or rent...",
     "main": "app.js",
+    "engines": {
+      "node": "10.16.0",
+      "npm": "6.9.0"
+    },
     "scripts": {
         "create": "babel-node server/db/create-table",
         "drop": "babel-node server/db/drop-table",
         "test": "cross-env NODE_ENV=test nyc --require @babel/register  mocha server/spec --exit",
         "testdev": "npm run drop & npm run drop && npm run create && cross-env NODE_ENV=test nyc --require @babel/register  mocha server/spec --exit",
+        "test:dev": "cross-env NODE_ENV=test nyc --require @babel/register  mocha server/spec --exit",
         "start": "rimraf dist/ && babel  ./server -d dist && node dist/app.js",
         "start:dev": "nodemon --exec babel-node server/app.js",
         "coverage": "nyc report --reporter=text-lcov | coveralls",
@@ -33,6 +38,13 @@
     },
     "homepage": "https://github.com/ldonjibson/propertypro--lite#readme",
     "dependencies": {
+        "@babel/cli": "^7.4.3",
+        "@babel/core": "^7.4.3",
+        "@babel/node": "^7.2.2",
+        "@babel/plugin-proposal-object-rest-spread": "^7.4.3",
+        "@babel/plugin-transform-regenerator": "^7.4.3",
+        "@babel/plugin-transform-runtime": "^7.4.3",        
+        "@babel/preset-env": "^7.4.3",
         "@babel/polyfill": "^7.4.3",
         "@babel/register": "^7.4.0",
         "@babel/runtime": "^7.4.3",
@@ -47,6 +59,7 @@
         "coveralls": "^3.0.3",
         "dotenv": "^7.0.0",
         "express": "^4.16.4",
+        "express-fileupload": "^1.1.5",
         "joi": "^14.3.1",
         "jsonwebtoken": "^8.5.1",
         "mocha": "^6.1.4",

@@ -41,7 +41,5 @@ class response {
       error: payload,
     });
   }
-
 }
-
 export default response;
