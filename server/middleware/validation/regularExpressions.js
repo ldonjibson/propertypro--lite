@@ -12,7 +12,10 @@ class RegularExpression {
       userName: /^[a-zA-Z]{3,25}$/,
       password: /[a-zA-Z0-9]{8,}/,
       accountType: /(client|agent)$/i,
+      status: /(available|sold)$/i,
       isAdmin: /(true|false)$/i,
+      price: /^[0-9]+.([0-9])+$/,
+      address: /^[a-zA-Z0-9_][a-zA-Z0-9_ ]*[a-zA-Z0-9_]$/,
     };
   }
 }
