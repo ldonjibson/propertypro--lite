@@ -103,7 +103,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/errorresponse"
+                  "$ref": "#/components/schemas/errorResponse"
                 }
               }
             }
@@ -151,7 +151,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/errorresponse"
+                  "$ref": "#/components/schemas/errorResponse"
                 }
               }
             }
@@ -181,7 +181,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/errorresponse"
+                  "$ref": "#/components/schemas/errorResponse"
                 }
               }
             }
@@ -245,7 +245,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/errorresponse"
+                  "$ref": "#/components/schemas/errorResponse"
                 }
               }
             }
@@ -255,7 +255,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/errorresponse"
+                  "$ref": "#/components/schemas/errorResponse"
                 }
               }
             }
@@ -296,7 +296,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/errorresponse"
+                  "$ref": "#/components/schemas/errorResponse"
                 }
               }
             }
@@ -371,7 +371,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/errorresponse"
+                  "$ref": "#/components/schemas/errorResponse"
                 }
               }
             }
@@ -381,7 +381,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/errorresponse"
+                  "$ref": "#/components/schemas/errorResponse"
                 }
               }
             }
@@ -425,7 +425,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/errorresponse"
+                  "$ref": "#/components/schemas/errorResponse"
                 }
               }
             }
@@ -435,7 +435,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/errorresponse"
+                  "$ref": "#/components/schemas/errorResponse"
                 }
               }
             }
@@ -481,7 +481,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/response"
+                  "$ref": "#/components/schemas/errorResponse"
                 }
               }
             }
@@ -491,7 +491,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/errorresponse"
+                  "$ref": "#/components/schemas/errorResponse"
                 }
               }
             }
@@ -532,7 +532,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/errorresponse"
+                  "$ref": "#/components/schemas/errorResponse"
                 }
               }
             }
@@ -587,7 +587,7 @@
       },
       "users": {
         "type": "object",
-        "users": {
+        "properties": {
           "token": {
             "type": "string"
           },
@@ -616,7 +616,7 @@
       },
       "response": {
         "type": "object",
-        "response": {
+        "properties": {
           "status": {
             "type": "string"
           },
@@ -625,9 +625,9 @@
           }
         }
       },
-      "errorresponse": {
+      "errorResponse": {
         "type": "object",
-        "errorresponse": {
+        "properties": {
           "status": {
             "type": "string"
           },
