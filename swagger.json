@@ -166,7 +166,7 @@
         ],
         "summary": "Get all properties",
         "responses": {
-          "201": {
+          "200": {
             "description": "success",
             "content": {
               "application/json": {
