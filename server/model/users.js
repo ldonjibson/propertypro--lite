@@ -9,7 +9,7 @@ const users = [
     "address": '22, owodunni, street, ikeja',
     "accountType": 'agent', // client or agent
     "is_admin": true, 
-    "createdOn": Date.now()
+    "created_on": Date.now()
   },
   {
     "id":2,
@@ -21,7 +21,7 @@ const users = [
     "address": '22, owodunni, street, ikeja',
     "accountType": 'agent', // client or agent
     "is_admin": false, 
-    "createdOn": Date.now()
+    "created_on": Date.now()
   },
   {
     "id":3,
@@ -33,7 +33,7 @@ const users = [
     "address":  '22, owodunni, street, ikeja',
     "accountType": 'client', // client or agent
     "is_admin": false, 
-    "createdOn": Date.now()
+    "created_on": Date.now()
   },
   {
     "id":4,
@@ -45,7 +45,7 @@ const users = [
     "address": '22, owodunni, street, ikeja',
     "accountType": 'client', // client or agent
     "is_admin": false, 
-    "createdOn": Date.now()
+    "created_on": Date.now()
   },
   {
     "id":5,
@@ -57,7 +57,7 @@ const users = [
     "address": '22, owodunni, street, ikeja',
     "accountType": 'client', // client or agent
     "is_admin": false, 
-    "createdOn": Date.now()
+    "created_on": Date.now()
   },
 
   {
@@ -70,7 +70,7 @@ const users = [
     "address": '22, owodunni, street, ikeja',
     "accountType": 'client', // client or agent
     "is_admin": false, 
-    "createdOn": Date.now()
+    "created_on": Date.now()
   },
 
   {
@@ -83,7 +83,7 @@ const users = [
     "address": '22, owodunni, street, ikeja',
     "accountType": 'agent', // client or agent
     "is_admin": false, 
-    "createdOn": Date.now()
+    "created_on": Date.now()
   },
 ];
 export default users;
