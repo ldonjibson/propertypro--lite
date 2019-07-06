@@ -13,10 +13,11 @@ describe('POST/auth signup', () => {
       .send({
         firstName: 'oslo',
         lastName: 'oslo',
-        email: 'osloiu@gmail.com',
+        email: 'oslogiuu@gmail.com',
         password: 'moneyheist',
         phoneNumber: '2348181384092',
         accountType: 'client',
+        address: '22,owdunitt street'
       })
       .end((err, res) => {
         expect(res.body).to.be.an('object');
@@ -24,8 +25,8 @@ describe('POST/auth signup', () => {
         expect(res.body.data).to.be.a('object');
         expect(res.body.data).to.have.property('token');
         expect(res.body.data).to.have.property('id');
-        expect(res.body.data).to.have.property('firstName');
-        expect(res.body.data).to.have.property('lastName');
+        expect(res.body.data).to.have.property('first_name');
+        expect(res.body.data).to.have.property('last_name');
         expect(res.body.data).to.have.property('email');
         expect(res.body.data.token).to.be.a('string');
         expect(res.body.data.email).to.equal('oslo@gmail.com');
