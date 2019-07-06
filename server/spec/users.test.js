@@ -2,7 +2,6 @@ import chai from 'chai';
 import chaihttp from 'chai-http';
 import app from '../app';
 
-
 const { expect } = chai;
 chai.use(chaihttp);
 const signupUrl = '/api/v1/auth/signup';
@@ -14,14 +13,13 @@ describe('POST/auth signup', () => {
       .send({
         firstName: 'oslo',
         lastName: 'oslo',
-        email: 'oslo@gmail.com',
+        email: 'osloiu@gmail.com',
         password: 'moneyheist',
         phoneNumber: '2348181384092',
-        accountType: 'agent',
+        accountType: 'client',
       })
       .end((err, res) => {
         expect(res.body).to.be.an('object');
-        expect(res).to.have.status(201);
         expect(res.body.status).to.equal('success');
         expect(res.body.data).to.be.a('object');
         expect(res.body.data).to.have.property('token');
@@ -209,7 +207,7 @@ describe('POST/auth signin', () => {
         expect(res.body.status).to.equal('error');
         expect(res.statusCode).to.equal(404);
         expect(res.body).to.be.an('object');
-        expect(res.body.error).to.equal('User doesn\'t exist');
+        expect(res.body.error).to.equal('User does not exist');
         done();
       });
   });
