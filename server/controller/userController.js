@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable prefer-const */
 // eslint-disable-next-line dot-notation
 import response from '../helper/response/index';
@@ -20,7 +21,7 @@ class UserController {
    * @memberof UserControllers
    */
   static async register(req, res) {
-    let { firstName, lastName, email, password, phoneNumber, accountType, address } = req.body;
+    let { first_name, last_name, email, password, phoneNumber, accountType, address } = req.body;
     let newUser;
     try {
       const hashPassword = await PasswordManager.hashPassword(password);
@@ -28,9 +29,9 @@ class UserController {
       if (userDetails) {
         return response.errorResponse(res, 409, 'error', 'Email already in use');
       }
-      let id; let isAdmin; let createdOn; let token;
-      [token, id, isAdmin, createdOn, password] = [`45erkjherht4549${Math.floor(Math.random() * 10000)}`, users.length + 1, false, Date.now(), hashPassword ];
-      newUser = { token, id, firstName, lastName, email, password, phoneNumber, address, accountType, isAdmin, createdOn };
+      let id; let is_admin; let created_on; let token;
+      [token, id, is_admin, created_on, password] = [`45erkjherht4549${Math.floor(Math.random() * 10000)}`, users.length + 1, false, Date.now(), hashPassword ];
+      newUser = { token, id, first_name, last_name, email, password, phoneNumber, address, accountType, is_admin, created_on}     
       users.push(newUser);
     } catch (error) {
       return response.errorResponse(res, 500, 'error', 'Server error');
