@@ -5,7 +5,9 @@ import bodyparser from 'body-parser';
 import cors from 'cors';
 import fileUpload from 'express-fileupload';
 
+import swaggerUi from 'swagger-ui-express';
 import routes from './route/index';
+import swaggerdoc from '../swagger.json';
 
 const app = express();
 app.use(cors());
@@ -15,6 +17,7 @@ app.use(bodyparser.urlencoded({ extended: true }));
 app.use(express.static(path.resolve(__dirname, '../UI')));
 app.use('/api/v1/', routes);
 app.get('/', (req, res) => res.sendFile('../UI/index.html'));
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerdoc));
 
 app.all('*', (req, res) => {
   res.status(404).json({
