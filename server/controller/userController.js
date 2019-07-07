@@ -1,3 +1,4 @@
+/* eslint-disable object-curly-newline */
 /* eslint-disable camelcase */
 /* eslint-disable prefer-const */
 // eslint-disable-next-line dot-notation

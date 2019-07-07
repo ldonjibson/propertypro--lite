@@ -10,7 +10,7 @@ const properties = [
     "price": 300000.00,
     "imageurl":'\'http://res.cloudinary.com/propertypro-lite/image/upload/v1561324469/iajxae68txspixfgsbrc.jpg\''
   },
-  {
+  {    
     "owner": 4, //
     "type": '\'3 bed room\'', // 2bed room, mini flat
     "status": '\'dormant\'', // sold, available

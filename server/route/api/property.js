@@ -15,7 +15,6 @@ import UploadingImage from '../../helper/imageupload/index';
 const propertyRoutes = Router();
 propertyRoutes.post('/',
   AuthMiddleware.checkIfUserIsAuthenticated,
-  AuthMiddleware.checkUserById,
   AccountValidation.agentChecker,
   DoValidation.type,
   DoValidation.address,
@@ -26,7 +25,6 @@ propertyRoutes.post('/',
 propertyRoutes.patch('/:propertyId',
   DoValidation.id,
   AuthMiddleware.checkIfUserIsAuthenticated,
-  AuthMiddleware.checkUserById,
   AccountValidation.agentChecker,
   DoValidation.type,
   DoValidation.address,
@@ -37,14 +35,12 @@ propertyRoutes.patch('/:propertyId',
 propertyRoutes.patch('/:propertyId/sold',
   DoValidation.id,
   AuthMiddleware.checkIfUserIsAuthenticated,
-  AuthMiddleware.checkUserById,
   AccountValidation.agentChecker,
   PropertyController.updateStatusProperty);
 
 propertyRoutes.delete('/:propertyId',
   DoValidation.id,
   AuthMiddleware.checkIfUserIsAuthenticated,
-  AuthMiddleware.checkUserById,
   AccountValidation.agentChecker,
   PropertyController.deleteProperty);
 
