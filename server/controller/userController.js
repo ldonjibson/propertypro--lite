@@ -2,8 +2,9 @@
 /* eslint-disable prefer-const */
 // eslint-disable-next-line dot-notation
 import response from '../helper/response/index';
+import TokenManager from '../helper/tokenManager';
 import PasswordManager from '../helper/passwordManager';
-import users from '../model/users';
+import pool from '../db/config';
 /**
    * @class UserController
    * @description UserController
@@ -25,18 +26,21 @@ class UserController {
     let newUser;
     try {
       const hashPassword = await PasswordManager.hashPassword(password);
-      const userDetails = await users.find(user => user.email === email);
-      if (userDetails) {
+      const userDetails = await pool.query('select * from users where email = $1', [email]);
+      if (userDetails.rows[0]) {
         return response.errorResponse(res, 409, 'error', 'Email already in use');
       }
-      let id; let is_admin; let created_on; let token;
-      [token, id, is_admin, created_on, password] = [`45erkjherht4549${Math.floor(Math.random() * 10000)}`, users.length + 1, false, Date.now(), hashPassword ];
-      newUser = { token, id, first_name, last_name, email, password, phoneNumber, address, accountType, is_admin, created_on}     
-      users.push(newUser);
+      newUser = await pool.query(`insert into users (firstname, lastname, email, password, phonenumber, accounttype, address, isadmin) 
+      values ($1, $2, $3, $4, $5, $6, $7, $8) returning id`, [
+        firstName, lastName, email, hashPassword, phoneNumber, accountType, address, 'false' ]);
     } catch (error) {
       return response.errorResponse(res, 500, 'error', 'Server error');
     }
-    return response.successResponse(res, 201, 'success', newUser);
+    const { id } = newUser.rows[0];
+    const token = TokenManager.sign({ id, accountType, isAdmin: false });
+    return response.successResponse(res, 201, 'success', {
+      token, id, first_name: firstName, last_name: lastName, email, phoneNumber, accountType, address, is_admin: false,
+    });
   }
 
   /**
