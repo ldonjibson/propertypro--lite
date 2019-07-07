@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable prefer-const */
 // eslint-disable-next-line dot-notation
 import response from '../helper/response/index';
@@ -21,7 +22,7 @@ class UserController {
    * @memberof UserControllers
    */
   static async register(req, res) {
-    let { firstName, lastName, email, password, phoneNumber, accountType, address } = req.body;
+    let { first_name, last_name, email, password, phoneNumber, accountType, address } = req.body;
     let newUser;
     try {
       const hashPassword = await PasswordManager.hashPassword(password);
