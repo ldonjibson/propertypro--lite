@@ -1,0 +1,5 @@
+JWT_SECRET='my-secret-key'
+PORT=3001
+
+
+DATABASE_URL = postgresql://user:password@localhost:5433/propertypro
