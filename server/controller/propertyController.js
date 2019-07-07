@@ -6,6 +6,7 @@
 import response from '../helper/response/index';
 import properties from '../model/property';
 import users from '../model/users';
+import pool from '../db/config';
 
 /**
     * @class PropertyController
@@ -30,15 +31,18 @@ class PropertyController {
       userDetails: { id: userid },
     } = req;
     const price = await parseFloat(amount).toFixed(2);
+    let newProperty;
     try {
-      const [id, created_on, status, owner, image_url] = [properties.length + 1, Date.now(), 'available', userid, imageUrl];
-      const newProperty = { id, owner, status, type, state, city, address, price, created_on, image_url };
-      newProperty.address = address.trim();
-      properties.push(newProperty);
-      return response.successResponse(res, 201, 'success', newProperty);
+      // const newProperties = { owner: userid, status: '\'available\'', type, state, city, address: address.trim(), price, imageurl: imageUrl };
+      newProperty = await pool.query(`insert into property (owner, status, type, state, city, address, price, imageurl) 
+      values ($1, $2, $3, $4, $5, $6, $7, $8) returning *`, [
+        userid, '\'available\'', type, state, city, address.trim(), price, imageUrl]);
     } catch (error) {
       return response.errorResponse(res, 500, 'error', 'Server error');
     }
+    const { id, createdon } = newProperty.rows[0];
+    return response.successResponse(res, 201, 'success', {
+      id, owner: userid, status: '\'available\'', type, state, city, address: address.trim(), price, image_url: imageUrl, created_on: createdon });    
   }
 
   /**

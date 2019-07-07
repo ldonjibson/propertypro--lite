@@ -34,8 +34,8 @@ class AccountValidation {
      * @returns {function} returns error message
      * @memberof AccountValidation
      */
-    const { accountType } = req.userDetails;
-    (accountType === 'agent') ? next() : response.errorResponse(res, 401, 'error', 'Unauthorized');
+    const { accounttype } = req.userDetails;
+    (accounttype === 'agent') ? next() : response.errorResponse(res, 401, 'error', 'Unauthorized');
   }
 }
 export default AccountValidation;

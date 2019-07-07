@@ -1,3 +1,4 @@
+/* eslint-disable object-curly-newline */
 /* eslint-disable prefer-const */
 // eslint-disable-next-line dot-notation
 import response from '../helper/response/index';

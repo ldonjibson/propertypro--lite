@@ -17,7 +17,7 @@ describe('POST/auth signup', () => {
         password: 'moneyheist',
         phoneNumber: '2348181384092',
         accountType: 'client',
-        address: '22,owdunitt street'
+        address: '22,owdunitt street',
       })
       .end((err, res) => {
         expect(res.body).to.be.an('object');

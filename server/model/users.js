@@ -1,6 +1,5 @@
 const users = [
   {
-    "id":1,
     "firstname": '\'Nairobi\'',
     "lastname": '\'Ozil\'',
     "email": '\'nairobi@gmail.com\'',
@@ -11,7 +10,6 @@ const users = [
     "isadmin": '\'true\'', // must be a agent user account
   },
   {
-    "id":2,
     "firstname": '\'Berlini\'',
     "lastname": '\'jone\'',
     "email": '\'Berliniike@gmail.com\'',
@@ -22,7 +20,6 @@ const users = [
     "isadmin": '\'false\'', // must be a agent user account
   },
   {
-    "id":3,
     "firstname": '\'John\'',
     "lastname": '\'dunga\'',
     "email": '\'johndum@gmail.com\'',
@@ -33,7 +30,6 @@ const users = [
     "isadmin": '\'false\'', // must be a agent user account
   },
   {
-    "id":4,
     "firstname": '\'Mark\'',
     "lastname": '\'Rio\'',
     "email": '\'MarkRio@gmail.com\'',
@@ -44,7 +40,6 @@ const users = [
     "isadmin": '\'false\'', // must be a agent user account
   },
   {
-    "id":5,
     "firstname": '\'Helsinki\'',
     "lastname": '\'soldier\'',
     "email": '\'helsinki@gmail.com\'',
@@ -56,7 +51,6 @@ const users = [
   },
 
   {
-    "id":6,
     "firstname": '\'Blessing\'',
     "lastname": '\'ashimi\'',
     "email": '\'ashimi@gmail.com\'',
@@ -68,7 +62,6 @@ const users = [
   },
 
   {
-    "id":7,
     "firstname": '\'Ajibola\'',
     "lastname": '\'Hussain\'',
     "email": '\'ajibolahussain@gmail.com\'',
