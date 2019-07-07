@@ -56,19 +56,24 @@ class UserController {
     let userDetails;
     let isPasswordValid;
     try {
-      userDetails = await users.find(user => user.email === email);
-      if (!userDetails) {
-        return response.errorResponse(res, 404, 'error', 'User doesn\'t exist');
+      userDetails = await pool.query('select * from users where email = $1', [email]);
+      if (!userDetails.rows[0]) {
+        return response.errorResponse(res, 404, 'error', 'User does not exist');
       }
-      isPasswordValid = PasswordManager.verifyPassword(password, userDetails.password);
+      isPasswordValid = PasswordManager.verifyPassword(password, userDetails.rows[0].password);
       if (isPasswordValid === false) {
         return response.errorResponse(res, 400, 'error', 'Incorrect Password or Email');
       }
     } catch (error) {
       return response.errorResponse(res, 500, 'error', 'Server error');
     }
-    delete userDetails.password;
-    return response.successResponse(res, 200, 'success', userDetails);
+    const { id, firstname, lastname, accounttype, isadmin, address } = userDetails.rows[0];
+    if (isPasswordValid) {
+      const token = TokenManager.sign({ id, accounttype, isadmin });
+      return response.successResponse(res, 200, 'success', {
+        token, id, first_name: firstname, last_name: lastname, email, accountType: accounttype, address, is_admin: isadmin, 
+      });
+    }
   }
 }
 
