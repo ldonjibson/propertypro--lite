@@ -145,7 +145,6 @@ class PropertyController {
     } catch (error) {
       return response.errorResponse(res, 500, 'error', 'Server error');
     }
-
   }
 
   /**
@@ -158,14 +157,16 @@ class PropertyController {
     */
   static async specificPropertyDetail(req, res) {
     const { propertyId } = req.params;
+    let detailProperty;
     try {
-      const detailProperty = await properties.find(property => property.id === parseInt(propertyId));
-      const getPropertyOwner = await users.find(user => user.id === detailProperty.owner);
-      [detailProperty.ownerEmail, detailProperty.ownerPhoneNumber] = [getPropertyOwner.email , getPropertyOwner.phoneNumber];
-      return response.successResponse(res, 200, 200, detailProperty);
+      detailProperty = await pool.query('SELECT * FROM properties INNER JOIN users on properties.owner = users.id WHERE properties.id = $1', [parseInt(propertyId)]);
     } catch (error) {
       return response.errorResponse(res, 500, 'error', 'Server error');
     }
+    const { id, owner, status, city, state, address, price, createdon, imageurl, firstname, lastname, email, phonenumber, accounttype } = detailProperty.rows[0];
+    return response.successResponse(res, 200, 200, { 
+      id, owner, status, city, state, address, price: parseFloat(price).toFixed(2), created_on: createdon, image_url: imageurl, first_name: firstname, last_name: lastname, email, phone_number: phonenumber, account_type: accounttype,
+    });
   }
 }
 export default PropertyController;
