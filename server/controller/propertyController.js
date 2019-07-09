@@ -60,18 +60,14 @@ class PropertyController {
       params: { propertyId },
     } = req;
     const price = parseFloat(amount).toFixed(2);
+    let updateProperty;
     try {
-      const getProperty = await pool.query(`SELECT id, owner 
-      FROM properties WHERE id=$1 AND owner=$2 ORDER BY id DESC LIMIT 1;`, [propertyId, userid]);
-      if (!getProperty) {
-        return response.errorResponse(res, 401, 'error', 'You are not authorized to edit this property');
-      }
+      updateProperty = await pool.query(`update properties set type=$1, state=$2, city=$3, address=$4, price=$5, imageurl=$6 
+      where id = $7 returning *;`,
+      [type, state, city, address.trim(), price, imageUrl, parseInt(propertyId)]);
     } catch (error) {
       return response.errorResponse(res, 500, 'error', 'Server error');
     }
-    const updateProperty = await pool.query(`update properties set type=$1, state=$2, city=$3, address=$4, price=$5, imageurl=$6 
-    where id = $7 returning *;`,
-    [type, state, city, address.trim(), price, imageUrl, parseInt(propertyId)]);
     const { id, status, createdon } = updateProperty.rows[0];
     return response.successResponse(res, 201, 'success', {
       id, owner: userid, status, type, state, city, address: address.trim(), price, image_url: imageUrl, created_on: createdon });

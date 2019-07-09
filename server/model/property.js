@@ -20,7 +20,6 @@ const properties = [
     "imageurl":'\'http://res.cloudinary.com/propertypro-lite/image/upload/v1561324469/iajxae68txspixfgsbrc.jpg\''
   },
   {
-    "id": 3,
     "owner": 1, //
     "type": '\'2 bed room\'', // 2bed room, mini flat
     "status": '\'sold\'', // sold, available
