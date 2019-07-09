@@ -28,21 +28,21 @@ class PropertyController {
   static async postProperty(req, res) {
     const {
       body: { type, state, city, address, amount, imageUrl },
-      userDetails: { id: userid },
+      userDetails: { id: userId },
     } = req;
     const price = await parseFloat(amount).toFixed(2);
     let newProperty;
     try {
       // const newProperties = { owner: userid, status: '\'available\'', type, state, city, address: address.trim(), price, imageurl: imageUrl };
-      newProperty = await pool.query(`insert into property (owner, status, type, state, city, address, price, imageurl) 
+      newProperty = await pool.query(`insert into properties (owner, status, type, state, city, address, price, imageurl) 
       values ($1, $2, $3, $4, $5, $6, $7, $8) returning *`, [
-        userid, '\'available\'', type, state, city, address.trim(), price, imageUrl]);
+        userId, '\'available\'', type, state, city, address.trim(), price, imageUrl]);
     } catch (error) {
       return response.errorResponse(res, 500, 'error', 'Server error');
     }
     const { id, createdon } = newProperty.rows[0];
     return response.successResponse(res, 201, 'success', {
-      id, owner: userid, status: '\'available\'', type, state, city, address: address.trim(), price, image_url: imageUrl, created_on: createdon });    
+      id, owner: userId, status: '\'available\'', type, state, city, address: address.trim(), price, image_url: imageUrl, created_on: createdon });    
   }
 
   /**
@@ -108,20 +108,13 @@ class PropertyController {
     * @memberof PropertyController
     */
   static async deleteProperty(req, res) {
-    const {
-      userDetails: { id: userid },
-      params: { propertyId },
-    } = req;
+    const { propertyId } = req.params;
     try {
-      const getProperty = await properties.find(property => property.id === parseInt(propertyId) && property.owner === parseInt(userid));
-      if (!getProperty) {
-        return response.errorResponse(res, 401, 'error', 'You are not authorized to delete this property');
-      }
-      properties.splice([parseInt(propertyId) - 1], 1);
-      return response.successResponse(res, 200, 'success', { message: 'Property deleted successfully.'});
+      await pool.query('delete from properties where id = $1', [propertyId]);
     } catch (error) {
       return response.errorResponse(res, 500, 'error', 'Server error');
     }
+    return response.successResponse(res, 200, 'success', { message: 'Property deleted successfully.'});
   }
 
   /**

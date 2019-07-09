@@ -13,7 +13,7 @@ const properties = [
   {    
     "owner": 4, //
     "type": '\'3 bed room\'', // 2bed room, mini flat
-    "status": '\'dormant\'', // sold, available
+    "status": '\'available\'', // sold, available
     "city": '\'Lagos\'',
     "state": '\'Lagos State\'',
     "address": '\'29,owodunni street ilupeju onipanu\'',
