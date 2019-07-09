@@ -9,6 +9,7 @@ import AccountValidation from '../../middleware/validation/accountValidation';
 import AuthMiddleware from '../../middleware/authMiddleware/authMiddleware';
 import DoValidation from '../../middleware/validation/dovalidation';
 import UploadingImage from '../../helper/imageupload/index';
+import PropertyValidation from '../../middleware/validation/propertyValidation';
 
 
 // account routes
@@ -26,6 +27,7 @@ propertyRoutes.patch('/:propertyId',
   DoValidation.id,
   AuthMiddleware.checkIfUserIsAuthenticated,
   AccountValidation.agentChecker,
+  PropertyValidation.propertyOwnerChecker,
   DoValidation.type,
   DoValidation.address,
   DoValidation.price,
@@ -36,12 +38,14 @@ propertyRoutes.patch('/:propertyId/sold',
   DoValidation.id,
   AuthMiddleware.checkIfUserIsAuthenticated,
   AccountValidation.agentChecker,
+  PropertyValidation.propertyOwnerChecker,
   PropertyController.updateStatusProperty);
 
 propertyRoutes.delete('/:propertyId',
   DoValidation.id,
   AuthMiddleware.checkIfUserIsAuthenticated,
   AccountValidation.agentChecker,
+  PropertyValidation.propertyOwnerChecker,
   PropertyController.deleteProperty);
 
 propertyRoutes.get('/',
