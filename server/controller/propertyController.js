@@ -42,7 +42,7 @@ class PropertyController {
     }
     const { id, createdon } = newProperty.rows[0];
     return response.successResponse(res, 201, 'success', {
-      id, owner: userId, status: '\'available\'', type, state, city, address: address.trim(), price, image_url: imageUrl, created_on: createdon });    
+      id, owner: userId, status: '\'available\'', type, state, city, address: address.trim(), price, image_url: imageUrl, created_on: createdon });
   }
 
   /**
@@ -128,27 +128,24 @@ class PropertyController {
   static async listProperties(req, res) {
     const { type } = req.query;
     try {
-      let getTypeProperties;
+      let getProperties;
       if (type) {
-        getTypeProperties = await pool.query('SELECT * FROM properties INNER JOIN users on properties.owner = users.id WHERE type = $1', [type]);
+        getProperties = await pool.query('SELECT * FROM properties INNER JOIN users on properties.owner = users.id WHERE type = $1', [type]);
+        if (getProperties.rowCount === 0) {
+          return response.errorResponse(res, 404, 'error', 'No property was found');
+        }
+      } else {
+        getProperties = await pool.query('SELECT * FROM properties INNER JOIN users on properties.owner = users.id;');
       }
-      if (getTypeProperties.rowCount === 0) {
-        return response.errorResponse(res, 404, 'error', 'No property was found');
-      }
-      const {id, owner, status, city, state, address, price, createdon, imageurl, firstname, lastname, email, phonenumber, accounttype } = getTypeProperties.rows[0]
-      return response.successResponse(res, 200, 200, {
-        id, owner, status, city, state, address, price: parseFloat(price).toFixed(2), created_on: createdon, image_url: imageurl, first_name: firstname, last_name: lastname, email, phone_number: phonenumber, account_type: accounttype,
+      const data = getProperties.rows.map((property) => {
+        const { id, owner, status, city, state, address, price, createdon, imageurl, firstname, lastname, email, phonenumber, accounttype } = property;
+        return { id, owner, status, city, state, address, price: parseFloat(price).toFixed(2), created_on: createdon, image_url: imageurl, first_name: firstname, last_name: lastname, email, phone_number: phonenumber, account_type: accounttype,}
       });
-      // }
-      // const allProperties = await properties.map((property) => {
-      //   const getPropertyOwner = users.find(user => user.id === property.owner);
-      //   [property.ownerEmail, property.ownerPhoneNumber] = [getPropertyOwner.email, getPropertyOwner.phoneNumber];
-      //   return property;
-      // });
-      // return response.successResponse(res, 200, 200, allProperties);
+      return response.successResponse(res, 200, 200, data);
     } catch (error) {
       return response.errorResponse(res, 500, 'error', 'Server error');
     }
+
   }
 
   /**
