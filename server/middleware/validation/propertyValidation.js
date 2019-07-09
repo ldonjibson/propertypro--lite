@@ -31,7 +31,7 @@ class PropertytValidation {
      * @param {object} res HTTP response object
      * @param {function} next next middleware function
      * @returns {function} returns error message
-     * @memberof AccountValidation
+     * @memberof PropertytValidation
      */
     const { propertyId } = req.params;
     const userId = req.userDetails.id;
