@@ -11,7 +11,6 @@ import DoValidation from '../../middleware/validation/dovalidation';
 import UploadingImage from '../../helper/imageupload/index';
 import PropertyValidation from '../../middleware/validation/propertyValidation';
 
-
 // account routes
 const propertyRoutes = Router();
 propertyRoutes.post('/',
