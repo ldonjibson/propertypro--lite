@@ -9,7 +9,7 @@ import AccountValidation from '../../middleware/validation/accountValidation';
 import AuthMiddleware from '../../middleware/authMiddleware/authMiddleware';
 import DoValidation from '../../middleware/validation/dovalidation';
 import UploadingImage from '../../helper/imageupload/index';
-
+import PropertyValidation from '../../middleware/validation/propertyValidation';
 
 // account routes
 const propertyRoutes = Router();
@@ -26,6 +26,7 @@ propertyRoutes.patch('/:propertyId',
   DoValidation.id,
   AuthMiddleware.checkIfUserIsAuthenticated,
   AccountValidation.agentChecker,
+  PropertyValidation.propertyOwnerChecker,
   DoValidation.type,
   DoValidation.address,
   DoValidation.price,
