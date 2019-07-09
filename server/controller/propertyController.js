@@ -128,24 +128,24 @@ class PropertyController {
   static async listProperties(req, res) {
     const { type } = req.query;
     try {
+      let getTypeProperties;
       if (type) {
-        const getTypeProperties = await properties.filter(property => property.type === type);
-        const listTypeProperties = await getTypeProperties.map((property) => {
-          const getPropertyOwner = users.find(user => user.id === property.owner);
-          [property.ownerEmail, property.ownerPhoneNumber] = [getPropertyOwner.email, getPropertyOwner.phoneNumber];
-          return property;
-        });
-        if (listTypeProperties.length === 0) {
-          return response.errorResponse(res, 404, 'error', 'No property was found');
-        }
-        return response.successResponse(res, 200, 200, listTypeProperties);
+        getTypeProperties = await pool.query('SELECT * FROM properties INNER JOIN users on properties.owner = users.id WHERE type = $1', [type]);
       }
-      const allProperties = await properties.map((property) => {
-        const getPropertyOwner = users.find(user => user.id === property.owner);
-        [property.ownerEmail, property.ownerPhoneNumber] = [getPropertyOwner.email, getPropertyOwner.phoneNumber];
-        return property;
+      if (getTypeProperties.rowCount === 0) {
+        return response.errorResponse(res, 404, 'error', 'No property was found');
+      }
+      const {id, owner, status, city, state, address, price, createdon, imageurl, firstname, lastname, email, phonenumber, accounttype } = getTypeProperties.rows[0]
+      return response.successResponse(res, 200, 200, {
+        id, owner, status, city, state, address, price: parseFloat(price).toFixed(2), created_on: createdon, image_url: imageurl, first_name: firstname, last_name: lastname, email, phone_number: phonenumber, account_type: accounttype,
       });
-      return response.successResponse(res, 200, 200, allProperties);
+      // }
+      // const allProperties = await properties.map((property) => {
+      //   const getPropertyOwner = users.find(user => user.id === property.owner);
+      //   [property.ownerEmail, property.ownerPhoneNumber] = [getPropertyOwner.email, getPropertyOwner.phoneNumber];
+      //   return property;
+      // });
+      // return response.successResponse(res, 200, 200, allProperties);
     } catch (error) {
       return response.errorResponse(res, 500, 'error', 'Server error');
     }
