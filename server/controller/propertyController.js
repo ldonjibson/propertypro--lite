@@ -83,19 +83,20 @@ class PropertyController {
     */
   static async updateStatusProperty(req, res) {
     const {
-      userDetails: { id: userid },
+      userDetails: { id: userId },
       params: { propertyId },
     } = req;
+    let updateProperty;
     try {
-      const getProperty = await properties.find(property => property.id === parseInt(propertyId) && property.owner === parseInt(userid));
-      if (!getProperty) {
-        return response.errorResponse(res, 401, 'error', 'You are not authorized to edit this property');
-      }
-      getProperty.status = 'sold';
-      return response.successResponse(res, 201, 'success', getProperty);
+      updateProperty = await pool.query('update properties set status=$1 where id = $2 returning *;',
+        ['sold', parseInt(propertyId)]);
     } catch (error) {
       return response.errorResponse(res, 500, 'error', 'Server error');
     }
+    const { status, state, city, address, imageurl, createdon } = updateProperty.rows[0];
+    return response.successResponse(res, 201, 'success', {
+      id: propertyId, owner: userId, status, state, city, address, created_on: createdon, image_url: imageurl,
+    });
   }
 
   /**
