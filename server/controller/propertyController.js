@@ -60,18 +60,14 @@ class PropertyController {
       params: { propertyId },
     } = req;
     const price = parseFloat(amount).toFixed(2);
+    let updateProperty;
     try {
-      const getProperty = await pool.query(`SELECT id, owner 
-      FROM properties WHERE id=$1 AND owner=$2 ORDER BY id DESC LIMIT 1;`, [propertyId, userid]);
-      if (!getProperty) {
-        return response.errorResponse(res, 401, 'error', 'You are not authorized to edit this property');
-      }
+      updateProperty = await pool.query(`update properties set type=$1, state=$2, city=$3, address=$4, price=$5, imageurl=$6 
+      where id = $7 returning *;`,
+      [type, state, city, address.trim(), price, imageUrl, parseInt(propertyId)]);
     } catch (error) {
       return response.errorResponse(res, 500, 'error', 'Server error');
     }
-    const updateProperty = await pool.query(`update properties set type=$1, state=$2, city=$3, address=$4, price=$5, imageurl=$6 
-    where id = $7 returning *;`,
-    [type, state, city, address.trim(), price, imageUrl, parseInt(propertyId)]);
     const { id, status, createdon } = updateProperty.rows[0];
     return response.successResponse(res, 201, 'success', {
       id, owner: userid, status, type, state, city, address: address.trim(), price, image_url: imageUrl, created_on: createdon });
@@ -87,19 +83,20 @@ class PropertyController {
     */
   static async updateStatusProperty(req, res) {
     const {
-      userDetails: { id: userid },
+      userDetails: { id: userId },
       params: { propertyId },
     } = req;
+    let updateProperty;
     try {
-      const getProperty = await properties.find(property => property.id === parseInt(propertyId) && property.owner === parseInt(userid));
-      if (!getProperty) {
-        return response.errorResponse(res, 401, 'error', 'You are not authorized to edit this property');
-      }
-      getProperty.status = 'sold';
-      return response.successResponse(res, 201, 'success', getProperty);
+      updateProperty = await pool.query('update properties set status=$1 where id = $2 returning *;',
+        ['sold', parseInt(propertyId)]);
     } catch (error) {
       return response.errorResponse(res, 500, 'error', 'Server error');
     }
+    const { status, state, city, address, imageurl, createdon } = updateProperty.rows[0];
+    return response.successResponse(res, 201, 'success', {
+      id: propertyId, owner: userId, status, state, city, address, created_on: createdon, image_url: imageurl,
+    });
   }
 
   /**
