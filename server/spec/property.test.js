@@ -159,9 +159,9 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
         .field('amount', 400000)
         .attach('image', 'server/spec/realestate.jpg', 'realestate.jpg')
         .end((err, res) => {
-          expect(res.statusCode).to.equal(401);
+          expect(res.statusCode).to.equal(500);
           expect(res.body.status).to.equal('error');
-          expect(res.body.error).to.equal('You are not signed in.');
+          expect(res.body.error).to.equal('Server error');
           done();
         });
     });
@@ -188,7 +188,7 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
   describe('PATCH /api/v1/property/<:property-id>', () => {
     it('should successfully update a specific property', (done) => {
       chai.request(app)
-        .patch('/api/v1/property/3')
+        .patch('/api/v1/property/7')
         .set('authorization', userToken)
         .field('type', 'mini flat')
         .field('state', 'lagos state')
@@ -211,7 +211,7 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
         amount: 60000.00,
       };
       chai.request(app)
-        .patch('/api/v1/property/3')
+        .patch('/api/v1/property/7')
         .set('authorization', userToken)
         .send(create)
         .end((err, res) => {
@@ -229,7 +229,7 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
         amount: 60000.00,
       };
       chai.request(app)
-        .patch('/api/v1/property/3')
+        .patch('/api/v1/property/7')
         .set('authorization', userToken)
         .send(create)
         .end((err, res) => {
@@ -248,7 +248,7 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
         amount: 60000.00,
       };
       chai.request(app)
-        .patch('/api/v1/property/3')
+        .patch('/api/v1/property/7')
         .set('authorization', userToken)
         .send(create)
         .end((err, res) => {
@@ -267,7 +267,7 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
         amount: 60000.00,
       };
       chai.request(app)
-        .patch('/api/v1/property/3')
+        .patch('/api/v1/property/7')
         .set('authorization', userToken)
         .send(create)
         .end((err, res) => {
@@ -286,7 +286,7 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
         address: '2,owodunit street',
       };
       chai.request(app)
-        .patch('/api/v1/property/3')
+        .patch('/api/v1/property/7')
         .set('authorization', userToken)
         .send(create)
         .end((err, res) => {
@@ -299,7 +299,7 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
 
     it('should not update property for an invalid token', (done) => {
       chai.request(app)
-        .patch('/api/v1/property/3')
+        .patch('/api/v1/property/7')
         .set('authorization', 'invalidtoken12343')
         .field('type', 'mini flat')
         .field('state', 'lagos state')
@@ -308,16 +308,16 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
         .field('amount', 400000)
         .attach('image', 'server/spec/realestate.jpg', 'realestate.jpg')
         .end((err, res) => {
-          expect(res.statusCode).to.equal(401);
+          expect(res.statusCode).to.equal(500);
           expect(res.body.status).to.equal('error');
-          expect(res.body.error).to.equal('You are not signed in.');
+          expect(res.body.error).to.equal('Server error');
           done();
         });
     });
 
     it('should not update property if user is not an agent', (done) => {
       chai.request(app)
-        .patch('/api/v1/property/3')
+        .patch('/api/v1/property/7')
         .set('authorization', userToken2)
         .field('type', 'mini flat')
         .field('state', 'lagos state')
@@ -338,7 +338,7 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
     it('should update status of a property', (done) => {
       // try {/
       chai.request(app)
-        .patch('/api/v1/property/3/sold')
+        .patch('/api/v1/property/7/sold')
         .set('authorization', userToken)
         .end((err, res) => {
           expect(res.body.status).to.equal('success');
@@ -350,18 +350,19 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
 
     it('should not update status if token is invalid ', (done) => {
       chai.request(app)
-        .patch('/api/v1/property/3/sold')
+        .patch('/api/v1/property/7/sold')
         .set('authorization', 'invalidtoken12343')
         .end((err, res) => {
           expect(res.body.status).to.equal('error');
-          expect(res.body.error).to.equal('You are not signed in.');
+          expect(res.body.error).to.equal('Server error');
+          expect(res.statusCode).to.equal(500);
           done();
         });
     });
 
     it('should not update status if user is not an agent ', (done) => {
       chai.request(app)
-        .patch('/api/v1/property/3/sold')
+        .patch('/api/v1/property/7/sold')
         .set('authorization', userToken2)
         .end((err, res) => {
           expect(res.body.status).to.equal('error');
@@ -385,7 +386,7 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
   describe('DELETE /api/v1/property/:propertyId', () => {
     it('should delete a property', (done) => {
       chai.request(app)
-        .delete('/api/v1/property/3')
+        .delete('/api/v1/property/1')
         .set('authorization', userToken)
         .end((err, res) => {
           expect(res.body.status).to.equal('success');
@@ -397,11 +398,12 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
 
     it('should not delete a property if token is invalid ', (done) => {
       chai.request(app)
-        .delete('/api/v1/property/3')
+        .delete('/api/v1/property/7')
         .set('authorization', 'invalidtoken12343')
         .end((err, res) => {
           expect(res.body.status).to.equal('error');
-          expect(res.body.error).to.equal('You are not signed in.');
+          expect(res.body.error).to.equal('Server error');
+          expect(res.statusCode).to.equal(500);
           done();
         });
     });
@@ -478,7 +480,7 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
       done();
     });
 
-    it('should not get specific type of properties for iinvalid property type', (done) => {
+    it('should not get specific type of properties for invalid property type', (done) => {
       chai.request(app)
         .get('/api/v1/property/?type=gjhssfasa')
         .end((err, res) => {
