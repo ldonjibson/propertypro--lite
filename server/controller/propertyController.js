@@ -164,7 +164,7 @@ class PropertyController {
       return response.errorResponse(res, 500, 'error', 'Server error');
     }
     const { id, owner, status, city, state, address, price, createdon, imageurl, firstname, lastname, email, phonenumber, accounttype } = detailProperty.rows[0];
-    return response.successResponse(res, 200, 'success', { 
+    return response.successResponse(res, 200, 'success', {
       id, owner, status, city, state, address, price: parseFloat(price).toFixed(2), created_on: createdon, image_url: imageurl, first_name: firstname, last_name: lastname, email, phone_number: phonenumber, account_type: accounttype,
     });
   }
