@@ -7,13 +7,40 @@ chai.use(chaihttp);
 const signupUrl = '/api/v1/auth/signup';
 
 describe('POST/auth signup', () => {
+  it('should signup a non existing user(agent)', (done) => {
+    chai.request(app)
+      .post(signupUrl)
+      .send({
+        firstName: 'igor',
+        lastName: 'oslo',
+        email: 'mighty@gmail.com',
+        password: 'moneyheist',
+        phoneNumber: '2348181384092',
+        accountType: 'agent',
+        address: '22,owdunitt street',
+      })
+      .end((err, res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.body.status).to.equal('success');
+        expect(res.body.data).to.be.a('object');
+        expect(res.body.data).to.have.property('token');
+        expect(res.body.data).to.have.property('id');
+        expect(res.body.data).to.have.property('first_name');
+        expect(res.body.data).to.have.property('last_name');
+        expect(res.body.data).to.have.property('email');
+        expect(res.body.data.token).to.be.a('string');
+        expect(res.body.data.email).to.equal('mighty@gmail.com');
+        done();
+      });
+  });
+
   it('should signup a non existing user(client)', (done) => {
     chai.request(app)
       .post(signupUrl)
       .send({
         firstName: 'oslo',
         lastName: 'oslo',
-        email: 'oslogiuu@gmail.com',
+        email: 'sfsds@gmail.com',
         password: 'moneyheist',
         phoneNumber: '2348181384092',
         accountType: 'client',
@@ -29,7 +56,7 @@ describe('POST/auth signup', () => {
         expect(res.body.data).to.have.property('last_name');
         expect(res.body.data).to.have.property('email');
         expect(res.body.data.token).to.be.a('string');
-        expect(res.body.data.email).to.equal('oslo@gmail.com');
+        expect(res.body.data.email).to.equal('sfsds@gmail.com');
         done();
       });
   });

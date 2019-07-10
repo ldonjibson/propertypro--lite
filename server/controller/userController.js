@@ -23,7 +23,7 @@ class UserController {
    * @memberof UserControllers
    */
   static async register(req, res) {
-    let { first_name, last_name, email, password, phoneNumber, accountType, address } = req.body;
+    let { firstName, lastName, email, password, phoneNumber, accountType, address } = req.body;
     let newUser;
     try {
       const hashPassword = await PasswordManager.hashPassword(password);
@@ -69,12 +69,13 @@ class UserController {
       return response.errorResponse(res, 500, 'error', 'Server error');
     }
     const { id, firstname, lastname, accounttype, isadmin, address } = userDetails.rows[0];
+    let token;
     if (isPasswordValid) {
-      const token = TokenManager.sign({ id, accounttype, isadmin });
-      return response.successResponse(res, 200, 'success', {
-        token, id, first_name: firstname, last_name: lastname, email, accountType: accounttype, address, is_admin: isadmin, 
-      });
+      token = TokenManager.sign({ id, accounttype, isadmin });
     }
+    return response.successResponse(res, 200, 'success', {
+      token, id, first_name: firstname, last_name: lastname, email, accountType: accounttype, address, is_admin: isadmin,
+    });
   }
 }
 
