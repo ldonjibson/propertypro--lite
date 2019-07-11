@@ -1,11 +1,10 @@
+/* eslint-disable object-property-newline */
 /* eslint-disable no-param-reassign */
 /* eslint-disable radix */
 /* eslint-disable object-curly-newline */
 /* eslint-disable max-len */
 
 import response from '../helper/response/index';
-import properties from '../model/property';
-import users from '../model/users';
 import pool from '../db/config';
 
 /**
@@ -33,7 +32,6 @@ class PropertyController {
     const price = await parseFloat(amount).toFixed(2);
     let newProperty;
     try {
-      // const newProperties = { owner: userid, status: '\'available\'', type, state, city, address: address.trim(), price, imageurl: imageUrl };
       newProperty = await pool.query(`insert into properties (owner, status, type, state, city, address, price, imageurl) 
       values ($1, $2, $3, $4, $5, $6, $7, $8) returning *`, [
         userId, '\'available\'', type, state, city, address.trim(), price, imageUrl]);
@@ -42,7 +40,8 @@ class PropertyController {
     }
     const { id, createdon } = newProperty.rows[0];
     return response.successResponse(res, 201, 'success', {
-      id, owner: userId, status: '\'available\'', type, state, city, address: address.trim(), price, image_url: imageUrl, created_on: createdon });
+      id, owner: userId, status: '\'available\'', type, state, city,
+      address: address.trim(), price, image_url: imageUrl, created_on: createdon });
   }
 
   /**
@@ -130,16 +129,20 @@ class PropertyController {
     try {
       let getProperties;
       if (type) {
-        getProperties = await pool.query('SELECT * FROM properties INNER JOIN users on properties.owner = users.id WHERE type = $1', [type]);
+        getProperties = await pool.query(`SELECT properties.id pid, * FROM properties INNER JOIN users on properties.owner = users.id 
+        WHERE properties.type = $1 ORDER BY properties.id;`, [type]);
         if (getProperties.rowCount === 0) {
           return response.errorResponse(res, 404, 'error', 'No property was found');
         }
       } else {
-        getProperties = await pool.query('SELECT * FROM properties INNER JOIN users on properties.owner = users.id;');
+        getProperties = await pool.query(`SELECT properties.id pid, * FROM properties INNER JOIN users on properties.owner = users.id 
+        ORDER BY properties.id;`);
       }
       const data = getProperties.rows.map((property) => {
-        const { id, owner, status, city, state, address, price, createdon, imageurl, firstname, lastname, email, phonenumber, accounttype } = property;
-        return { id, owner, status, city, state, address, price: parseFloat(price).toFixed(2), created_on: createdon, image_url: imageurl, first_name: firstname, last_name: lastname, email, phone_number: phonenumber, account_type: accounttype,}
+        const { pid, owner, status, city, state, address, price, createdon, imageurl,
+          firstname, lastname, email, phonenumber, accounttype } = property;
+        return { id: pid, owner, type, status, city, state, address, price: parseFloat(price).toFixed(2), created_on: createdon,
+          image_url: imageurl, first_name: firstname, last_name: lastname, email, phone_number: phonenumber, account_type: accounttype };
       });
       return response.successResponse(res, 200, 'success', data);
     } catch (error) {
@@ -159,13 +162,17 @@ class PropertyController {
     const { propertyId } = req.params;
     let detailProperty;
     try {
-      detailProperty = await pool.query('SELECT * FROM properties INNER JOIN users on properties.owner = users.id WHERE properties.id = $1', [parseInt(propertyId)]);
+      detailProperty = await pool.query(`SELECT properties.id pid, * FROM properties INNER JOIN users on 
+      properties.owner = users.id WHERE properties.id = $1`, [parseInt(propertyId)]);
     } catch (error) {
       return response.errorResponse(res, 500, 'error', 'Server error');
     }
-    const { id, owner, status, city, state, address, price, createdon, imageurl, firstname, lastname, email, phonenumber, accounttype } = detailProperty.rows[0];
+    const { pid, type, owner, status, city, state, address, price, createdon,
+      imageurl, firstname, lastname, email, phonenumber, accounttype } = detailProperty.rows[0];
     return response.successResponse(res, 200, 'success', {
-      id, owner, status, city, state, address, price: parseFloat(price).toFixed(2), created_on: createdon, image_url: imageurl, first_name: firstname, last_name: lastname, email, phone_number: phonenumber, account_type: accounttype,
+      id: pid, owner, type, status, city, state, address, price: parseFloat(price).toFixed(2),
+      created_on: createdon, image_url: imageurl, first_name: firstname, last_name: lastname,
+      email, phone_number: phonenumber, account_type: accounttype,
     });
   }
 }
