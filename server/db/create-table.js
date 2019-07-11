@@ -19,7 +19,7 @@ const Tables = `CREATE TABLE IF NOT EXISTS users(
 
   CREATE TABLE IF NOT EXISTS properties(
     id serial PRIMARY KEY,
-    owner int NOT NULL,
+    owner int REFERENCES users(id) ON DELETE CASCADE,
     type text NOT NULL,
     status text NOT NULL,
     city text NOT NULL,
