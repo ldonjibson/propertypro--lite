@@ -69,7 +69,8 @@ class PropertyController {
     }
     const { id, status, createdon } = updateProperty.rows[0];
     return response.successResponse(res, 201, 'success', {
-      id, owner: userid, status, type, state, city, address: address.trim(), price, image_url: imageUrl, created_on: createdon });
+      id, owner: userid, status, type, state, city, address: address.trim(),
+      price, image_url: imageUrl, created_on: createdon });
   }
 
   /**
@@ -141,8 +142,9 @@ class PropertyController {
       const data = getProperties.rows.map((property) => {
         const { pid, owner, status, city, state, address, price, createdon, imageurl,
           firstname, lastname, email, phonenumber, accounttype } = property;
-        return { id: pid, owner, type, status, city, state, address, price: parseFloat(price).toFixed(2), created_on: createdon,
-          image_url: imageurl, first_name: firstname, last_name: lastname, email, phone_number: phonenumber, account_type: accounttype };
+        return { id: pid, owner, type, status, city, state, address, price: parseFloat(price).toFixed(2),
+          created_on: createdon, image_url: imageurl, first_name: firstname, last_name: lastname, email,
+          phone_number: phonenumber, account_type: accounttype };
       });
       return response.successResponse(res, 200, 'success', data);
     } catch (error) {
