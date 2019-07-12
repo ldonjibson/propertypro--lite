@@ -92,10 +92,9 @@ class UserController {
    * @memberof UserControllers
    */
   static async passwordReset(req, res) {
-    const { password, newPassword } = req.body;
-    const { email } = req.params;
-    let changedPassword;
-    let userDetails;
+    const { body: { password, newPassword },
+      params: { email } } = req;
+    let changedPassword; let userDetails;
     try {
       userDetails = await pool.query('select * from users where email = $1', [email]);
       if (!userDetails.rows[0]) {
