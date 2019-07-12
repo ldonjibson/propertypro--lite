@@ -14,5 +14,5 @@ ValidationMessages.type = 'Enter the property type';
 ValidationMessages.isAdmin = 'Indicate Administrative Post';
 ValidationMessages.city = 'Enter the city where the property is located';
 ValidationMessages.state = 'Enter the state where the property is located';
-ValidationMessages.address = 'Enter the address of the property';
+ValidationMessages.address = 'Enter the address';
 export default ValidationMessages;

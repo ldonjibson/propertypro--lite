@@ -122,6 +122,12 @@ class DoValidation {
     return next();
   }
 
+  static useraddress(req, res, next) {
+    const { address } = req.body;
+    if (!address) { return response.errorResponse(res, 400, 'error', ValidationMessages.address); }
+    return next();
+  }
+
   static status(req, res, next) {
     const { status } = req.body;
     const validate = RegularExpression.validate();

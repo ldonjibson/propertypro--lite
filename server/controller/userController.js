@@ -40,7 +40,7 @@ class UserController {
     const { id } = newUser.rows[0];
     const token = TokenManager.sign({ id, accountType, isAdmin: false });
     return response.successResponse(res, 201, 'success', {
-      token, id, first_name: firstName, last_name: lastName, email, phoneNumber, accountType, address, is_admin: false,
+      token, id, first_name: firstName, last_name: lastName, email, phone_number: phoneNumber, account_type: accountType, address, is_admin: false,
     });
   }
 
@@ -74,7 +74,7 @@ class UserController {
       token = TokenManager.sign({ id, accounttype, isadmin });
     }
     return response.successResponse(res, 200, 'success', {
-      token, id, first_name: firstname, last_name: lastname, email, accountType: accounttype, address, is_admin: isadmin,
+      token, id, first_name: firstname, last_name: lastname, email, account_type: accounttype, address, is_admin: isadmin,
     });
   }
 }
