@@ -124,7 +124,7 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body.status).to.equal('error');
-          expect(res.body.error).to.equal('Enter the address of the property');
+          expect(res.body.error).to.equal('Enter the address');
           done();
         });
     });
@@ -273,7 +273,7 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body.status).to.equal('error');
-          expect(res.body.error).to.equal('Enter the address of the property');
+          expect(res.body.error).to.equal('Enter the address');
           done();
         });
     });
