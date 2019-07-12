@@ -6,9 +6,9 @@ import RegularExpression from './regularExpressions';
 class DoValidation {
   static email(req, res, next) {
     let { email } = req.body;
+    const validate = RegularExpression.validate();
     // eslint-disable-next-line prefer-destructuring
     if (!email) { email = req.params.email; }
-    const validate = RegularExpression.validate();
     if (!validate.email.test(email)) {
       return response.errorResponse(res, 400, 'error', ValidationMessages.email);
     }
@@ -54,17 +54,11 @@ class DoValidation {
   }
 
   static id(req, res, next) {
-    const { id, propertyId } = req.params;
+    let { id } = req.params;
     const validate = RegularExpression.validate();
-    if (id) {
-      if (!validate.phoneNumber.test(id)) {
-        return response.errorResponse(res, 400, 'error', ValidationMessages.Id);
-      }
-    }
-    if (propertyId) {
-      if (!validate.phoneNumber.test(propertyId)) {
-        return response.errorResponse(res, 400, 'error', ValidationMessages.Id);
-      }
+    if (!id) { id = req.params.propertyId; }
+    if (!validate.phoneNumber.test(id)) {
+      return response.errorResponse(res, 400, 'error', ValidationMessages.Id);
     }
     return next();
   }

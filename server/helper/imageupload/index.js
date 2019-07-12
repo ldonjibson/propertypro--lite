@@ -37,17 +37,4 @@ class UploadingImage {
     }
   }
 }
-
-
-// const uploadFile = async (uplaodedimage) => {
-//   console.log(uplaodedimage);
-//   // return image.name;
-//   // image.mv(`./uploads/${image.name}`, (error, result) => {
-//   //   if (error) {
-//   //     return response(res, 409, 'image failed to upload');
-//   //   }
-//   //   return result.url;
-//   // });
-// };
-
 export default UploadingImage;

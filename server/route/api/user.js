@@ -29,4 +29,11 @@ userRoutes.post(
   UserController.signin,
 );
 
+// password reset route
+userRoutes.post(
+  '/:email/reset_password',
+  DoValidation.email,
+  UserController.passwordReset,
+);
+
 export default userRoutes;
