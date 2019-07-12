@@ -70,6 +70,7 @@ describe('POST/auth signup', () => {
         password: 'moneyheist',
         phoneNumber: '2348181384092',
         accountType: 'agent',
+        address:'22,owodunnnit stra'
       })
       .end((err, res) => {
         expect(res.body).to.be.an('object');
@@ -87,6 +88,7 @@ describe('POST/auth signup', () => {
         password: 'maquiness',
         phoneNumber: '2348181384092',
         accountType: 'agent',
+        address:'22,owodunnnit stra'
       })
       .end((err, res) => {
         expect(res.body).to.be.an('object');
@@ -103,6 +105,7 @@ describe('POST/auth signup', () => {
       password: 'professor',
       phoneNumber: '2348181384092',
       accountType: 'agent',
+      address:'22,owodunnnit stra',
     };
     chai.request(app)
       .post(signupUrl)
@@ -124,6 +127,7 @@ describe('POST/auth signup', () => {
         password: 'professor',
         phoneNumber: '2348181384092',
         accountType: 'agent',
+        address:'22,owodunnnit stra',
       })
       .end((err, res) => {
         expect(res.body).to.be.an('object');
@@ -142,6 +146,7 @@ describe('POST/auth signup', () => {
         email: 'xavi@gmail.com',
         phoneNumber: '2348181384092',
         accountType: 'agent',
+        address:'22,owodunnnit stra',
       })
       .end((err, res) => {
         expect(res.body).to.be.an('object');
@@ -160,6 +165,7 @@ describe('POST/auth signup', () => {
         email: 'xavi@gmail.com',
         password: 'nollywo',
         accountType: 'user',
+        address:'22,owodunnnit stra',
       })
       .end((err, res) => {
         expect(res.body).to.be.an('object');
@@ -178,6 +184,7 @@ describe('POST/auth signup', () => {
         email: 'xavi@gmail.com',
         password: 'nollywo',
         phoneNumber: '2348181384092',
+        address:'22,owodunnnit stra',
       })
       .end((err, res) => {
         expect(res.body).to.be.an('object');
