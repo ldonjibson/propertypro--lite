@@ -263,3 +263,58 @@ describe('POST/auth signin', () => {
       });
   });
 });
+
+// Password reset Test
+describe('POST/auth reset_password', () => {
+  const passwordResetUrl = '/api/v1/auth/ashimi@gmail.com/reset_password';
+  const passwordResetUrl2 = '/api/v1/auth/Berliniike@gmail.com/reset_password';
+  it('should generate password and send to user email', (done) => {
+    chai.request(app)
+      .post(passwordResetUrl)
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(204);
+        done();
+      });
+  });
+
+  it('should allow user to change password if old password is correct', (done) => {
+    chai.request(app)
+      .post(passwordResetUrl2)
+      .send({
+        password: 'nollywood10',
+        newPassword: 'bollywood1000',
+      })
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(204);
+        done();
+      });
+  });
+
+  it('should not allow wrong email to reset password', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/noemal@gmail.com/reset_password')
+      .end((err, res) => {
+        expect(res.body.status).to.equal('error');
+        expect(res.statusCode).to.equal(404);
+        expect(res.body).to.be.an('object');
+        expect(res.body.error).to.equal('User does not exist');
+        done();
+      });
+  });
+
+  it('should not allow wrong old password to reset password', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/nairobi@gmail.com/reset_password')
+      .send({
+        password: 'Berliniike@gmail.com',
+        newPassword: 'sfssffdfs',
+      })
+      .end((err, res) => {
+        expect(res.body.status).to.equal('error');
+        expect(res.statusCode).to.equal(400);
+        expect(res.body).to.be.an('object');
+        expect(res.body.error).to.equal('Incorrect Password');
+        done();
+      });
+  });
+});
