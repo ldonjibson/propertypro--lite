@@ -61,10 +61,10 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "first_name": {
+                  "firstName": {
                     "type": "string"
                   },
-                  "last_name": {
+                  "lastName": {
                     "type": "string"
                   },
                   "email": {
@@ -603,7 +603,7 @@
           "email": {
             "type": "string"
           },
-          "phoneNumber": {
+          "phone_number": {
             "type": "string"
           },
           "address": {

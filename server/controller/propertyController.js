@@ -130,14 +130,14 @@ class PropertyController {
     try {
       let getProperties;
       if (type) {
-        getProperties = await pool.query(`SELECT properties.id pid, * FROM properties INNER JOIN users on properties.owner = users.id 
-        WHERE properties.type = $1 ORDER BY properties.id;`, [type]);
+        getProperties = await pool.query(`SELECT properties.id pid, * FROM properties INNER JOIN users 
+        on properties.owner = users.id WHERE properties.type = $1 ORDER BY properties.id;`, [type]);
         if (getProperties.rowCount === 0) {
           return response.errorResponse(res, 404, 'error', 'No property was found');
         }
       } else {
-        getProperties = await pool.query(`SELECT properties.id pid, * FROM properties INNER JOIN users on properties.owner = users.id 
-        ORDER BY properties.id;`);
+        getProperties = await pool.query(`SELECT properties.id pid, * FROM properties INNER JOIN 
+        users on properties.owner = users.id ORDER BY properties.id;`);
       }
       const data = getProperties.rows.map((property) => {
         const { pid, owner, status, city, state, address, price, createdon, imageurl,
