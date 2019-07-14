@@ -37,7 +37,6 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
 
   describe('POST /api/v1/property', () => {
     it('should successfully create a property', (done) => {
-      // try {/
       chai.request(app)
         .post('/api/v1/property')
         .set('authorization', userToken)
@@ -45,7 +44,8 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
         .field('state', 'lagos state')
         .field('city', 'lagos')
         .field('address', '2,owodunit street')
-        .field('amount', 400000)
+        .field('price', 400000)
+        .field('image_url', 'http://res.cloudinary.com/propertypro-lite/image/upload/v1561324469/iajxae68txspixfgsbrc.jpg')
         .attach('image', 'server/spec/realestate.jpg', 'realestate.jpg')
         .end((err, res) => {
           expect(res.body.status).to.equal('success');
@@ -59,7 +59,8 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
         state: 'lagos state',
         city: 'lagos',
         address: '2,owodunit street',
-        amount: 60000.00,
+        price: 60000.00,
+        image_url: 'http://res.cloudinary.com/propertypro-lite/image/upload/v1561324469/iajxae68txspixfgsbrc.jpg',
       };
       chai.request(app)
         .post('/api/v1/property')
@@ -78,6 +79,7 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
         city: 'lagos',
         address: '2,owodunit street',
         amount: 60000.00,
+        image_url: 'http://res.cloudinary.com/propertypro-lite/image/upload/v1561324469/iajxae68txspixfgsbrc.jpg',
       };
       chai.request(app)
         .post('/api/v1/property')
@@ -97,6 +99,7 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
         state: 'lagos state',
         address: '2,owodunit street',
         amount: 60000.00,
+        image_url: 'http://res.cloudinary.com/propertypro-lite/image/upload/v1561324469/iajxae68txspixfgsbrc.jpg',
       };
       chai.request(app)
         .post('/api/v1/property')
@@ -116,6 +119,7 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
         state: 'lagos state',
         city: 'lagos',
         amount: 60000.00,
+        image_url: 'http://res.cloudinary.com/propertypro-lite/image/upload/v1561324469/iajxae68txspixfgsbrc.jpg',
       };
       chai.request(app)
         .post('/api/v1/property')
@@ -135,6 +139,7 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
         state: 'lagos state',
         city: 'lagos',
         address: '2,owodunit street',
+        image_url: 'http://res.cloudinary.com/propertypro-lite/image/upload/v1561324469/iajxae68txspixfgsbrc.jpg',
       };
       chai.request(app)
         .post('/api/v1/property')
@@ -157,6 +162,7 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
         .field('city', 'lagos')
         .field('address', '2,owodunit street')
         .field('amount', 400000)
+        .field('image_url', 'http://res.cloudinary.com/propertypro-lite/image/upload/v1561324469/iajxae68txspixfgsbrc.jpg')
         .attach('image', 'server/spec/realestate.jpg', 'realestate.jpg')
         .end((err, res) => {
           expect(res.statusCode).to.equal(500);
@@ -187,108 +193,100 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
 
   describe('PATCH /api/v1/property/<:property-id>', () => {
     it('should successfully update a specific property', (done) => {
+      const create = {
+        price: 400000,
+      };
       chai.request(app)
         .patch('/api/v1/property/7')
         .set('authorization', userToken)
-        .field('type', 'mini flat')
-        .field('state', 'lagos state')
-        .field('city', 'lagos')
-        .field('address', '2,owodunit street')
-        .field('amount', 400000)
-        .attach('image', 'server/spec/realestate.jpg', 'realestate.jpg')
+        .send(create)
         .end((err, res) => {
           expect(res.body.status).to.equal('success');
           expect(res.statusCode).to.equal(201);
         });
       done();
-    }).timeout(10000);
-
-    it('should not update property if type is missing', (done) => {
-      const create = {
-        state: 'lagos state',
-        city: 'lagos',
-        address: '2,owodunit street',
-        amount: 60000.00,
-      };
-      chai.request(app)
-        .patch('/api/v1/property/7')
-        .set('authorization', userToken)
-        .send(create)
-        .end((err, res) => {
-          expect(res.body.status).to.equal('error');
-          expect(res.body.error).to.equal('Enter the property type');
-          done();
-        });
     });
 
-    it('should not update property if state is missing', (done) => {
-      const create = {
-        type: 'mini flat',
-        city: 'lagos',
-        address: '2,owodunit street',
-        amount: 60000.00,
-      };
-      chai.request(app)
-        .patch('/api/v1/property/7')
-        .set('authorization', userToken)
-        .send(create)
-        .end((err, res) => {
-          expect(res.statusCode).to.equal(400);
-          expect(res.body.status).to.equal('error');
-          expect(res.body.error).to.equal('Enter the state where the property is located');
-          done();
-        });
-    });
+    // it('should not update property if type is missing', (done) => {
+    //   const create = {
+    //     state: 'lagos state',
+    //     city: 'lagos',
+    //     address: '2,owodunit street',
+    //     amount: 60000.00,
+    //     .field('image_url', 'http://res.cloudinary.com/propertypro-lite/image/upload/v1561324469/iajxae68txspixfgsbrc.jpg')
+    //   };
+    //   chai.request(app)
+    //     .patch('/api/v1/property/7')
+    //     .set('authorization', userToken)
+    //     .send(create)
+    //     .end((err, res) => {
+    //       expect(res.body.status).to.equal('error');
+    //       expect(res.body.error).to.equal('Enter the property type');
+    //       done();
+    //     });
+    // });
 
-    it('should not update property if city is missing', (done) => {
-      const create = {
-        type: 'mini flat',
-        state: 'lagos state',
-        address: '2,owodunit street',
-        amount: 60000.00,
-      };
-      chai.request(app)
-        .patch('/api/v1/property/7')
-        .set('authorization', userToken)
-        .send(create)
-        .end((err, res) => {
-          expect(res.statusCode).to.equal(400);
-          expect(res.body.status).to.equal('error');
-          expect(res.body.error).to.equal('Enter the city where the property is located');
-          done();
-        });
-    });
+    // it('should not update property if state is missing', (done) => {
+    //   const create = {
+    //     type: 'mini flat',
+    //     city: 'lagos',
+    //     address: '2,owodunit street',
+    //     amount: 60000.00,
+    //   };
+    //   chai.request(app)
+    //     .patch('/api/v1/property/7')
+    //     .set('authorization', userToken)
+    //     .send(create)
+    //     .end((err, res) => {
+    //       expect(res.statusCode).to.equal(400);
+    //       expect(res.body.status).to.equal('error');
+    //       expect(res.body.error).to.equal('Enter the state where the property is located');
+    //       done();
+    //     });
+    // });
 
-    it('should not update property if address is missing', (done) => {
-      const create = {
-        type: 'mini flat',
-        state: 'lagos state',
-        city: 'lagos',
-        amount: 60000.00,
-      };
-      chai.request(app)
-        .patch('/api/v1/property/7')
-        .set('authorization', userToken)
-        .send(create)
-        .end((err, res) => {
-          expect(res.statusCode).to.equal(400);
-          expect(res.body.status).to.equal('error');
-          expect(res.body.error).to.equal('Enter the address');
-          done();
-        });
-    });
+    // it('should not update property if city is missing', (done) => {
+    //   const create = {
+    //     type: 'mini flat',
+    //     state: 'lagos state',
+    //     address: '2,owodunit street',
+    //     amount: 60000.00,
+    //   };
+    //   chai.request(app)
+    //     .patch('/api/v1/property/7')
+    //     .set('authorization', userToken)
+    //     .send(create)
+    //     .end((err, res) => {
+    //       expect(res.statusCode).to.equal(400);
+    //       expect(res.body.status).to.equal('error');
+    //       expect(res.body.error).to.equal('Enter the city where the property is located');
+    //       done();
+    //     });
+    // });
 
-    it('should not update property if amount is missing', (done) => {
-      const create = {
-        type: 'mini flat',
-        state: 'lagos state',
-        city: 'lagos',
-        address: '2,owodunit street',
-      };
+    // it('should not update property if address is missing', (done) => {
+    //   const create = {
+    //     type: 'mini flat',
+    //     state: 'lagos state',
+    //     city: 'lagos',
+    //     amount: 60000.00,
+    //   };
+    //   chai.request(app)
+    //     .patch('/api/v1/property/7')
+    //     .set('authorization', userToken)
+    //     .send(create)
+    //     .end((err, res) => {
+    //       expect(res.statusCode).to.equal(400);
+    //       expect(res.body.status).to.equal('error');
+    //       expect(res.body.error).to.equal('Enter the address');
+    //       done();
+    //     });
+    // });
+
+    it('should not update property if price is missing', (done) => {
       chai.request(app)
         .patch('/api/v1/property/7')
         .set('authorization', userToken)
-        .send(create)
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body.status).to.equal('error');
@@ -301,12 +299,12 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
       chai.request(app)
         .patch('/api/v1/property/7')
         .set('authorization', 'invalidtoken12343')
-        .field('type', 'mini flat')
-        .field('state', 'lagos state')
-        .field('city', 'lagos')
-        .field('address', '2,owodunit street')
-        .field('amount', 400000)
-        .attach('image', 'server/spec/realestate.jpg', 'realestate.jpg')
+        // .field('type', 'mini flat')
+        // .field('state', 'lagos state')
+        // .field('city', 'lagos')
+        // .field('address', '2,owodunit street')
+        .field('price', 400000)
+        // .attach('image', 'server/spec/realestate.jpg', 'realestate.jpg')
         .end((err, res) => {
           expect(res.statusCode).to.equal(500);
           expect(res.body.status).to.equal('error');
@@ -319,12 +317,7 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
       chai.request(app)
         .patch('/api/v1/property/7')
         .set('authorization', userToken2)
-        .field('type', 'mini flat')
-        .field('state', 'lagos state')
-        .field('city', 'lagos')
-        .field('address', '2,owodunit street')
-        .field('amount', 400000)
-        .attach('image', 'server/spec/realestate.jpg', 'realestate.jpg')
+        .field('price', 400000)
         .end((err, res) => {
           expect(res.statusCode).to.equal(401);
           expect(res.body.status).to.equal('error');
@@ -336,7 +329,6 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
 
   describe('PATCH /api/v1/property/:propertyId/sold', () => {
     it('should update status of a property', (done) => {
-      // try {/
       chai.request(app)
         .patch('/api/v1/property/7/sold')
         .set('authorization', userToken)

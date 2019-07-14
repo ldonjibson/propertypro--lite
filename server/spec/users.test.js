@@ -11,12 +11,11 @@ describe('POST/auth signup', () => {
     chai.request(app)
       .post(signupUrl)
       .send({
-        firstName: 'igor',
-        lastName: 'oslo',
+        first_name: 'igor',
+        last_name: 'oslo',
         email: 'mighty@gmail.com',
         password: 'moneyheist',
-        phoneNumber: '2348181384092',
-        accountType: 'agent',
+        phone_number: '2348181384092',
         address: '22,owdunitt street',
       })
       .end((err, res) => {
@@ -34,43 +33,16 @@ describe('POST/auth signup', () => {
       });
   });
 
-  it('should signup a non existing user(client)', (done) => {
-    chai.request(app)
-      .post(signupUrl)
-      .send({
-        firstName: 'oslo',
-        lastName: 'oslo',
-        email: 'sfsds@gmail.com',
-        password: 'moneyheist',
-        phoneNumber: '2348181384092',
-        accountType: 'client',
-        address: '22,owdunitt street',
-      })
-      .end((err, res) => {
-        expect(res.body).to.be.an('object');
-        expect(res.body.status).to.equal('success');
-        expect(res.body.data).to.be.a('object');
-        expect(res.body.data).to.have.property('token');
-        expect(res.body.data).to.have.property('id');
-        expect(res.body.data).to.have.property('first_name');
-        expect(res.body.data).to.have.property('last_name');
-        expect(res.body.data).to.have.property('email');
-        expect(res.body.data.token).to.be.a('string');
-        expect(res.body.data.email).to.equal('sfsds@gmail.com');
-        done();
-      });
-  });
   it('should not signup a registered user', (done) => {
     chai.request(app)
       .post(signupUrl)
       .send({
-        firstName: 'Nairobi',
-        lastName: 'Ozil',
+        first_name: 'Nairobi',
+        last_name: 'Ozil',
         email: 'nairobi@gmail.com',
         password: 'moneyheist',
-        phoneNumber: '2348181384092',
-        accountType: 'agent',
-        address:'22,owodunnnit stra'
+        phone_number: '2348181384092',
+        address: '22,owodunnnit stra',
       })
       .end((err, res) => {
         expect(res.body).to.be.an('object');
@@ -83,12 +55,11 @@ describe('POST/auth signup', () => {
     chai.request(app)
       .post(signupUrl)
       .send({
-        firstName: 'professor',
-        lastName: 'sergio',
+        first_name: 'professor',
+        last_name: 'sergio',
         password: 'maquiness',
-        phoneNumber: '2348181384092',
-        accountType: 'agent',
-        address:'22,owodunnnit stra'
+        phone_number: '2348181384092',
+        address: '22,owodunnnit stra',
       })
       .end((err, res) => {
         expect(res.body).to.be.an('object');
@@ -97,15 +68,14 @@ describe('POST/auth signup', () => {
         done();
       });
   });
-  it('should not signup a user when firstName is missing', (done) => {
+  it('should not signup a user when first_name is missing', (done) => {
     const user = {
-      firstName: '',
-      lastName: 'sergio',
+      first_name: '',
+      last_name: 'sergio',
       email: 'professor@gmail.com',
       password: 'professor',
-      phoneNumber: '2348181384092',
-      accountType: 'agent',
-      address:'22,owodunnnit stra',
+      phone_number: '2348181384092',
+      address: '22,owodunnnit stra',
     };
     chai.request(app)
       .post(signupUrl)
@@ -113,27 +83,46 @@ describe('POST/auth signup', () => {
       .end((err, res) => {
         expect(res.body).to.be.an('object');
         expect(res.body.status).to.equal('error');
-        expect(res.body.error).to.equal('Enter a valid firstName.');
+        expect(res.body.error).to.equal('Enter a valid first name.');
         expect(res.statusCode).to.equal(400);
         done();
       });
   });
-  it('should not signup a user when lastName is missing', (done) => {
+  it('should not signup a user when last_name is missing', (done) => {
     chai.request(app)
       .post(signupUrl)
       .send({
-        firstName: 'sergio',
+        first_name: 'sergio',
+        last_name: '',
         email: 'professor@gmail.com',
         password: 'professor',
-        phoneNumber: '2348181384092',
-        accountType: 'agent',
-        address:'22,owodunnnit stra',
+        phone_number: '2348181384092',
+        address: '22,owodunnnit stra',
       })
       .end((err, res) => {
         expect(res.body).to.be.an('object');
         expect(res.statusCode).to.equal(400);
         expect(res.body.status).to.equal('error');
-        expect(res.body.error).to.equal('Enter a valid lastName.');
+        expect(res.body.error).to.equal('Enter a valid last name.');
+        done();
+      });
+  });
+  it('should not signup a user when phone_number is missing', (done) => {
+    chai.request(app)
+      .post(signupUrl)
+      .send({
+        first_name: 'sergio',
+        last_name: 'sergio',
+        email: 'professor@gmail.com',
+        password: 'professor',
+        phone_number: '',
+        address: '22,owodunnnit stra',
+      })
+      .end((err, res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.statusCode).to.equal(400);
+        expect(res.body.status).to.equal('error');
+        expect(res.body.error).to.equal('Enter a valid Phone Number');
         done();
       });
   });
@@ -141,11 +130,10 @@ describe('POST/auth signup', () => {
     chai.request(app)
       .post(signupUrl)
       .send({
-        firstName: 'sergio',
-        lastName: 'xavi',
+        first_name: 'sergio',
+        last_name: 'xavi',
         email: 'xavi@gmail.com',
-        phoneNumber: '2348181384092',
-        accountType: 'agent',
+        phone_number: '2348181384092',
         address:'22,owodunnnit stra',
       })
       .end((err, res) => {
@@ -153,44 +141,6 @@ describe('POST/auth signup', () => {
         expect(res.body.status).to.equal('error');
         expect(res.statusCode).to.equal(400);
         expect(res.body.error).to.equal('Enter a password with at least 8 characters.');
-        done();
-      });
-  });
-  it('should not signup a user when the phoneNumber is missing', (done) => {
-    chai.request(app)
-      .post(signupUrl)
-      .send({
-        firstName: 'sergio',
-        lastName: 'xavi',
-        email: 'xavi@gmail.com',
-        password: 'nollywo',
-        accountType: 'user',
-        address:'22,owodunnnit stra',
-      })
-      .end((err, res) => {
-        expect(res.body).to.be.an('object');
-        expect(res.body.status).to.equal('error');
-        expect(res.statusCode).to.equal(400);
-        expect(res.body.error).to.equal('Enter a valid Phone Number');
-        done();
-      });
-  });
-  it('should not signup a user when the accountType is missing', (done) => {
-    chai.request(app)
-      .post(signupUrl)
-      .send({
-        firstName: 'sergio',
-        lastName: 'xavi',
-        email: 'xavi@gmail.com',
-        password: 'nollywo',
-        phoneNumber: '2348181384092',
-        address:'22,owodunnnit stra',
-      })
-      .end((err, res) => {
-        expect(res.body).to.be.an('object');
-        expect(res.body.status).to.equal('error');
-        expect(res.statusCode).to.equal(400);
-        expect(res.body.error).to.equal('account type can only be agent and client');
         done();
       });
   });
@@ -204,22 +154,6 @@ describe('POST/auth signin', () => {
       .post(signinUrl)
       .send({
         email: 'ajibolahussain@gmail.com',
-        password: 'nollywood10',
-      })
-      .end((err, res) => {
-        expect(res.body.status).to.equal('success');
-        expect(res.statusCode).to.equal(200);
-        expect(res.body.data).to.be.an('object');
-        expect(res.body.data).to.have.property('token');
-        done();
-      });
-  });
-
-  it('should signin an existing user(client)', (done) => {
-    chai.request(app)
-      .post(signinUrl)
-      .send({
-        email: 'johndum@gmail.com',
         password: 'nollywood10',
       })
       .end((err, res) => {
@@ -282,7 +216,7 @@ describe('POST/auth reset_password', () => {
       .post(passwordResetUrl2)
       .send({
         password: 'nollywood10',
-        newPassword: 'bollywood1000',
+        new_password: 'bollywood1000',
       })
       .end((err, res) => {
         expect(res.statusCode).to.equal(204);
@@ -301,13 +235,12 @@ describe('POST/auth reset_password', () => {
         done();
       });
   });
-
   it('should not allow wrong old password to reset password', (done) => {
     chai.request(app)
       .post('/api/v1/auth/nairobi@gmail.com/reset_password')
       .send({
         password: 'Berliniike@gmail.com',
-        newPassword: 'sfssffdfs',
+        new_password: 'sfssffdfs',
       })
       .end((err, res) => {
         expect(res.body.status).to.equal('error');

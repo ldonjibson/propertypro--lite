@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import cloudinary from 'cloudinary';
 import response from '../response/index';
 
@@ -22,19 +23,28 @@ class UploadingImage {
      */
   // eslint-disable-next-line consistent-return
   static async uploadFile(req, res, next) {
+    let resultingimageurl;
+    const {
+      files: { image },
+      body: { image_url },
+    } = req;
     try {
-      const { image } = req.files;
-      if (!image) {
+      if (!image && !image_url) {
         return response.errorResponse(res, 409, 'error', 'Please upload an image.');
       }
-      await cloudinary.uploader.upload(image.tempFilePath, (results) => {
-        req.body.imageUrl = results.url;
-        console.log(req.body.imageUrl);
-      });
-      return next();
+      if (image) {
+        await cloudinary.uploader.upload(image.tempFilePath, (results) => {
+          resultingimageurl = results.url;
+        });
+      }
+      if (image_url) {
+        resultingimageurl = image_url;
+      }
     } catch (error) {
       return response.errorResponse(res, 500, 'error', 'Server error');
     }
+    req.body.image_url = resultingimageurl;
+    return next();
   }
 }
 export default UploadingImage;

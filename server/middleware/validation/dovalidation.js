@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import ValidationMessages from '../../helper/messages/validationMessages';
 import response from '../../helper/response/index';
 import RegularExpression from './regularExpressions';
@@ -24,30 +25,30 @@ class DoValidation {
   }
 
   static userName(req, res, next) {
-    const { firstName, lastName } = req.body;
-    if (!firstName) {
+    const { first_name, last_name } = req.body;
+    if (!first_name) {
       return response.errorResponse(res, 400, 'error', ValidationMessages.firstName);
     }
-    if (!lastName) {
+    if (!last_name) {
       return response.errorResponse(res, 400, 'error', ValidationMessages.lastName);
     }
     const validate = RegularExpression.validate();
-    if (!validate.userName.test(firstName.trim())) {
+    if (!validate.userName.test(first_name.trim())) {
       return response.errorResponse(res, 400, 'error', ValidationMessages.firstName);
     }
-    if (!validate.userName.test(lastName.trim())) {
+    if (!validate.userName.test(last_name.trim())) {
       return response.errorResponse(res, 400, 'error', ValidationMessages.lastName);
     }
     return next();
   }
 
   static phoneNumber(req, res, next) {
-    const { phoneNumber } = req.body;
-    if (!phoneNumber) {
+    const { phone_number } = req.body;
+    if (!phone_number) {
       return response.errorResponse(res, 400, 'error', ValidationMessages.phoneNumber);
     }
     const validate = RegularExpression.validate();
-    if (!validate.phoneNumber.test(phoneNumber.trim())) {
+    if (!validate.phoneNumber.test(phone_number.trim())) {
       return response.errorResponse(res, 400, 'error', ValidationMessages.phoneNumber);
     }
     return next();
@@ -73,9 +74,9 @@ class DoValidation {
   }
 
   static price(req, res, next) {
-    const { amount } = req.body;
+    const { price } = req.body;
     const validate = RegularExpression.validate();
-    if (!validate.price.test(amount)) {
+    if (!validate.price.test(price)) {
       return response.errorResponse(res, 400, 'error', ValidationMessages.price);
     }
     return next();
@@ -90,9 +91,9 @@ class DoValidation {
   }
 
   static isAdmin(req, res, next) {
-    const { isAdmin } = req.body;
+    const { is_admin } = req.body;
     const validate = RegularExpression.validate();
-    if (!validate.isAdmin.test(isAdmin)) {
+    if (!validate.isAdmin.test(is_admin)) {
       return response.errorResponse(res, 400, 'error', ValidationMessages.isAdmin);
     }
     return next();

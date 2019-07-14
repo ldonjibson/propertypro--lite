@@ -1,3 +1,5 @@
+/* eslint-disable prefer-const */
+/* eslint-disable camelcase */
 /* eslint-disable object-property-newline */
 /* eslint-disable no-param-reassign */
 /* eslint-disable radix */
@@ -25,23 +27,23 @@ class PropertyController {
     * @memberof PropertyController
     */
   static async postProperty(req, res) {
-    const {
-      body: { type, state, city, address, amount, imageUrl },
+    let {
+      body: { type, state, city, address, price, image_url },
       userDetails: { id: userId },
     } = req;
-    const price = await parseFloat(amount).toFixed(2);
+    price = await parseFloat(price).toFixed(2);
     let newProperty;
     try {
       newProperty = await pool.query(`insert into properties (owner, status, type, state, city, address, price, imageurl) 
       values ($1, $2, $3, $4, $5, $6, $7, $8) returning *`, [
-        userId, '\'available\'', type, state, city, address.trim(), price, imageUrl]);
+        userId, '\'available\'', type, state, city, address.trim(), price, image_url]);
     } catch (error) {
       return response.errorResponse(res, 500, 'error', 'Server error');
     }
     const { id, createdon } = newProperty.rows[0];
     return response.successResponse(res, 201, 'success', {
       id, owner: userId, status: '\'available\'', type, state, city,
-      address: address.trim(), price, image_url: imageUrl, created_on: createdon });
+      address: address.trim(), price, image_url, created_on: createdon });
   }
 
   /**
@@ -53,24 +55,24 @@ class PropertyController {
     * @memberof PropertyController
     */
   static async updateProperty(req, res) {
-    const {
-      body: { type, state, city, address, amount, imageUrl },
+    let {
+      body: { price },
       userDetails: { id: userid },
       params: { propertyId },
     } = req;
-    const price = parseFloat(amount).toFixed(2);
+    price = parseFloat(price).toFixed(2);
     let updateProperty;
     try {
-      updateProperty = await pool.query(`update properties set type=$1, state=$2, city=$3, address=$4, price=$5, imageurl=$6 
-      where id = $7 returning *;`,
-      [type, state, city, address.trim(), price, imageUrl, parseInt(propertyId)]);
+      updateProperty = await pool.query(`update properties set price=$1, 
+      where id = $2 returning *;`,
+      [price, parseInt(propertyId)]);
     } catch (error) {
       return response.errorResponse(res, 500, 'error', 'Server error');
     }
-    const { id, status, createdon } = updateProperty.rows[0];
+    const { id, type, state, city, address, status, imageurl, createdon } = updateProperty.rows[0];
     return response.successResponse(res, 201, 'success', {
-      id, owner: userid, status, type, state, city, address: address.trim(),
-      price, image_url: imageUrl, created_on: createdon });
+      id, owner: userid, status, type, state, city, address,
+      price, image_url: imageurl, created_on: createdon });
   }
 
   /**
