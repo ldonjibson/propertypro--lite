@@ -61,10 +61,10 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "firstName": {
+                  "first_name": {
                     "type": "string"
                   },
-                  "lastName": {
+                  "last_name": {
                     "type": "string"
                   },
                   "email": {
@@ -73,10 +73,7 @@
                   "password": {
                     "type": "string"
                   },
-                  "phoneNumber": {
-                    "type": "string"
-                  },
-                  "accountType": {
+                  "phone_number": {
                     "type": "string"
                   },
                   "address": {
@@ -315,24 +312,8 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "type": {
-                    "type": "string"
-                  },
-                  "state": {
-                    "type": "string"
-                  },
-                  "city": {
-                    "type": "string"
-                  },
-                  "address": {
-                    "type": "string"
-                  },
-                  "amount": {
+                  "price": {
                     "type": "number"
-                  },
-                  "image": {
-                    "type": "file",
-                    "format": "binary"
                   }
                 }
               }

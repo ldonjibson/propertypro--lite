@@ -16,7 +16,6 @@ userRoutes.post(
   DoValidation.password,
   DoValidation.userName,
   DoValidation.phoneNumber,
-  DoValidation.accountType,
   DoValidation.useraddress,
   UserController.register,
 );

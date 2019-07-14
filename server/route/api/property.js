@@ -27,8 +27,6 @@ propertyRoutes.patch('/:propertyId',
   AuthMiddleware.checkIfUserIsAuthenticated,
   AccountValidation.agentChecker,
   PropertyValidation.propertyOwnerChecker,
-  DoValidation.type,
-  DoValidation.address,
   DoValidation.price,
   UploadingImage.uploadFile,
   PropertyController.updateProperty);
