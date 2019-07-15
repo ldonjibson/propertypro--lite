@@ -58,11 +58,15 @@ class PropertyController {
     * @memberof PropertyController
     */
   static async updateProperty(req, res) {
+    console.log(req.body);
     let {
       body: { price },
       userDetails: { id: userid },
       params: { propertyId },
     } = req;
+    if (!price) {
+      price = 3000000;
+    }
     price = parseFloat(price).toFixed(2);
     let updateProperty;
     try {
@@ -148,7 +152,7 @@ class PropertyController {
         const { pid, owner, status, city, state, address, price, createdon, imageurl,
           firstname, lastname, email, phonenumber, accounttype } = property;
         return { id: pid, owner, type, status, city, state, address, price: parseFloat(price).toFixed(2),
-          created_on: createdon, image_url: imageurl, first_name: firstname, last_name: lastname, email,
+          created_on: createdon, image_url: imageurl, first_name: firstname, last_name: lastname, owner_email: email,
           phone_number: phonenumber, account_type: accounttype };
       });
       return response.successResponse(res, 200, 'success', data);
