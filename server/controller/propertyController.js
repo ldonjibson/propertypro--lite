@@ -58,7 +58,6 @@ class PropertyController {
     * @memberof PropertyController
     */
   static async updateProperty(req, res) {
-    console.log(req.body);
     let {
       body: { price },
       userDetails: { id: userid },
@@ -70,7 +69,7 @@ class PropertyController {
     price = parseFloat(price).toFixed(2);
     let updateProperty;
     try {
-      updateProperty = await pool.query(`update properties set price=$1, 
+      updateProperty = await pool.query(`update properties set price=$1 
       where id = $2 returning *;`,
       [price, parseInt(propertyId)]);
     } catch (error) {
