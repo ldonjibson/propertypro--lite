@@ -15,7 +15,7 @@ import PropertyValidation from '../../middleware/validation/propertyValidation';
 const propertyRoutes = Router();
 propertyRoutes.post('/',
   AuthMiddleware.checkIfUserIsAuthenticated,
-  AccountValidation.agentChecker,
+  // AccountValidation.agentChecker,
   // DoValidation.type,
   // DoValidation.address,
   // DoValidation.price,

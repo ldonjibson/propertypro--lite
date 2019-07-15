@@ -27,8 +27,6 @@ class PropertyController {
     * @memberof PropertyController
     */
   static async postProperty(req, res) {
-    console.log(req.body);
-    console.log(req.headers);
     let {
       body: { type, state, city, address, price, image_url },
       userDetails: { id: userId },
@@ -57,7 +55,6 @@ class PropertyController {
     * @memberof PropertyController
     */
   static async updateProperty(req, res) {
-    console.log(req.body);
     let {
       body: { price },
       userDetails: { id: userid },
@@ -87,7 +84,6 @@ class PropertyController {
     * @memberof PropertyController
     */
   static async updateStatusProperty(req, res) {
-    console.log(req.body);
     const {
       userDetails: { id: userId },
       params: { propertyId },
@@ -114,7 +110,6 @@ class PropertyController {
     * @memberof PropertyController
     */
   static async deleteProperty(req, res) {
-    console.log(req.body);
     const { propertyId } = req.params;
     try {
       await pool.query('delete from properties where id = $1', [propertyId]);
@@ -133,7 +128,6 @@ class PropertyController {
     * @memberof PropertyController
     */
   static async listProperties(req, res) {
-    console.log(req.body);
     const { type } = req.query;
     try {
       let getProperties;
@@ -169,7 +163,6 @@ class PropertyController {
     * @memberof PropertyController
     */
   static async specificPropertyDetail(req, res) {
-    console.log(req.body);
     const { propertyId } = req.params;
     let detailProperty;
     try {

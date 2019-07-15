@@ -19,6 +19,9 @@ class AuthMiddleware {
   static async checkIfUserIsAuthenticated(req, res, next) {
     try {
       const { authorization } = req.headers || req.params || req.body;
+      console.log(req.body);
+      console.log(req.headers);
+      console.log(authorization);
       if (!authorization) {
         return response.errorResponse(res, 401, 'error', 'You are not signed in.');
       }
