@@ -22,7 +22,10 @@ class AuthMiddleware {
       if (!authorization) {
         return response.errorResponse(res, 401, 'error', 'You are not signed in.');
       }
-      const token = authorization;
+      let token = authorization;
+      if (token.startsWith('Bearer ')) {
+        token = token.slice(7, token.length);
+      }
       const decoded = await TokenManager.verify(token);
       if (!decoded) {
         return response.errorResponse(res, 401, 'error', 'You are not signed in.');

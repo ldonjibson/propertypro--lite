@@ -41,7 +41,7 @@ class UserController {
       return response.errorResponse(res, 500, 'error', 'Server error');
     }
     const { id } = newUser.rows[0];
-    const token = TokenManager.sign({ id, accountType, isadmin: false });
+    const token = `Bearer ${TokenManager.sign({ id, accounttype: accountType, isadmin: false })}`;
     return response.successResponse(res, 201, 'success', {
       token, id, first_name, last_name, email, phone_number,
       account_type: accountType, address, is_admin: false,
@@ -75,7 +75,7 @@ class UserController {
     const { id, firstname, lastname, accounttype, isadmin, address } = userDetails.rows[0];
     let token;
     if (isPasswordValid) {
-      token = TokenManager.sign({ id, accounttype, isadmin });
+      token = `Bearer ${TokenManager.sign({ id, accounttype, isadmin })}`;
     }
     return response.successResponse(res, 200, 'success', {
       token, id, first_name: firstname, last_name: lastname,
