@@ -23,8 +23,8 @@ userRoutes.post(
 // signin route
 userRoutes.post(
   '/signin',
-  DoValidation.email,
-  DoValidation.password,
+  // DoValidation.email,
+  // DoValidation.password,
   UserController.signin,
 );
 

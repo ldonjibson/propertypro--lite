@@ -25,7 +25,6 @@ class UserController {
    * @memberof UserControllers
    */
   static async register(req, res) {
-    console.log(req);
     let { first_name, last_name, email, password, phone_number, address } = req.body;
     let newUser; const accountType = 'agent';
     try {
