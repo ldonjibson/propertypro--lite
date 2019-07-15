@@ -19,7 +19,7 @@ propertyRoutes.post('/',
   // DoValidation.type,
   // DoValidation.address,
   // DoValidation.price,
-  UploadingImage.uploadFile,
+  // UploadingImage.uploadFile,
   PropertyController.postProperty);
 
 propertyRoutes.patch('/:propertyId',
