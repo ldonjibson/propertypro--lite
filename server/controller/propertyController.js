@@ -33,6 +33,9 @@ class PropertyController {
     } = req;
     price = await parseFloat(price).toFixed(2);
     let newProperty;
+    if (!image_url) {
+      image_url = 'http://res.cloudinary.com/propertypro-lite/image/upload/v1561324469/iajxae68txspixfgsbrc.jpg';
+    }
     try {
       newProperty = await pool.query(`insert into properties (owner, status, type, state, city, address, price, imageurl) 
       values ($1, $2, $3, $4, $5, $6, $7, $8) returning *`, [
