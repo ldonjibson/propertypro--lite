@@ -135,6 +135,7 @@ class PropertyController {
     * @memberof PropertyController
     */
   static async listProperties(req, res) {
+    console.log(req.body || req.query);
     const { type } = req.query;
     try {
       let getProperties;
