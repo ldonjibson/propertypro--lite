@@ -46,9 +46,11 @@ propertyRoutes.delete('/:propertyId',
   PropertyController.deleteProperty);
 
 propertyRoutes.get('/',
+  AuthMiddleware.checkIfUserIsAuthenticated,
   PropertyController.listProperties);
 
 propertyRoutes.get('/:propertyId',
   DoValidation.id,
+  AuthMiddleware.checkIfUserIsAuthenticated,
   PropertyController.specificPropertyDetail);
 export default propertyRoutes;

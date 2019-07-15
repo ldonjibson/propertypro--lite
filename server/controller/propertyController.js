@@ -27,6 +27,7 @@ class PropertyController {
     * @memberof PropertyController
     */
   static async postProperty(req, res) {
+    console.log(req);
     let {
       body: { type, state, city, address, price, image_url },
       userDetails: { id: userId },
