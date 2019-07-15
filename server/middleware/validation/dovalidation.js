@@ -83,7 +83,7 @@ class DoValidation {
   }
 
   static type(req, res, next) {
-    const { type } = req.body;
+    const { type } = req.body || req.query;
     if (!type) {
       return response.errorResponse(res, 400, 'error', ValidationMessages.type);
     }
