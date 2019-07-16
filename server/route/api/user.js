@@ -12,19 +12,19 @@ const userRoutes = Router();
 // signup route
 userRoutes.post(
   '/signup',
-  DoValidation.email,
-  DoValidation.password,
-  DoValidation.userName,
-  DoValidation.phoneNumber,
-  DoValidation.useraddress,
+  // DoValidation.email,
+  // DoValidation.password,
+  // DoValidation.userName,
+  // DoValidation.phoneNumber,
+  // DoValidation.useraddress,
   UserController.register,
 );
 
 // signin route
 userRoutes.post(
   '/signin',
-  DoValidation.email,
-  DoValidation.password,
+  // DoValidation.email,
+  // DoValidation.password,
   UserController.signin,
 );
 
