@@ -427,6 +427,7 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
     it('should list all properties and types', (done) => {
       chai.request(app)
         .get('/api/v1/property')
+        .set('authorization', userToken)
         .end((err, res) => {
           expect(res.body.status).to.equal('success');
           expect(res.body.data).to.be.an('array');
@@ -440,7 +441,8 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
   describe('GET /api/v1/property/:propertyId', () => {
     it('should get details of a specific property', (done) => {
       chai.request(app)
-        .get('/api/v1/property/4')
+        .get('/api/v1/property/2')
+        .set('authorization', userToken)
         .end((err, res) => {
           expect(res.body.status).to.equal('success');
           expect(res.body.data).to.be.an('object');
@@ -452,6 +454,7 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
     it('should not get details of a specific property for invalid id', (done) => {
       chai.request(app)
         .get('/api/v1/property/g')
+        .set('authorization', userToken)
         .end((err, res) => {
           expect(res.body.status).to.equal('error');
           expect(res.statusCode).to.equal(400);
@@ -463,6 +466,7 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
     it('should get specific type of properties', (done) => {
       chai.request(app)
         .get('/api/v1/property/?type=2 bed room')
+        .set('authorization', userToken)
         .end((err, res) => {
           expect(res.body.status).to.equal('success');
           expect(res.body.data).to.be.an('array');
@@ -475,6 +479,7 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
     it('should not get specific type of properties for invalid property type', (done) => {
       chai.request(app)
         .get('/api/v1/property/?type=gjhssfasa')
+        .set('authorization', userToken)
         .end((err, res) => {
           expect(res.body.status).to.equal('error');
           expect(res.statusCode).to.equal(404);
