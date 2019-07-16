@@ -142,7 +142,8 @@ class PropertyController {
         users on properties.owner = users.id ORDER BY properties.id;`);
       }
       const data = getProperties.rows.map((property) => {
-        const { pid, owner, status, city, state, address, price, createdon, imageurl,
+        // eslint-disable-next-line no-shadow
+        const { pid, owner, type, status, city, state, address, price, createdon, imageurl,
           firstname, lastname, email, phonenumber, accounttype } = property;
         return { id: pid, owner, type, status, city, state, address, price: parseFloat(price).toFixed(2),
           created_on: createdon, image_url: imageurl, first_name: firstname, last_name: lastname, email,
