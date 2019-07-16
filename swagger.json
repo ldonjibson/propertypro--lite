@@ -162,6 +162,11 @@
           "Properties"
         ],
         "summary": "Get all properties",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "success",
@@ -266,6 +271,11 @@
           "Properties"
         ],
         "summary": "Gets a specific property detail",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
         "parameters": [
           {
             "name": "propertyId",
@@ -486,6 +496,11 @@
           "Properties"
         ],
         "summary": "Get specific types of a properties",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
         "parameters": [
           {
             "name": "propertyType",
