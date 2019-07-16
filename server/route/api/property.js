@@ -16,9 +16,9 @@ const propertyRoutes = Router();
 propertyRoutes.post('/',
   AuthMiddleware.checkIfUserIsAuthenticated,
   AccountValidation.agentChecker,
-  // DoValidation.type,
-  // DoValidation.address,
-  // DoValidation.price,
+  DoValidation.type,
+  DoValidation.address,
+  DoValidation.price,
   // UploadingImage.uploadFile,
   PropertyController.postProperty);
 
@@ -27,7 +27,7 @@ propertyRoutes.patch('/:propertyId',
   AuthMiddleware.checkIfUserIsAuthenticated,
   AccountValidation.agentChecker,
   PropertyValidation.propertyOwnerChecker,
-  // DoValidation.price,
+  DoValidation.price,
   // UploadingImage.uploadFile,
   PropertyController.updateProperty);
 
