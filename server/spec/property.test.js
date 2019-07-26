@@ -358,7 +358,7 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
         .set('authorization', userToken2)
         .end((err, res) => {
           expect(res.body.status).to.equal('error');
-          expect(res.body.error).to.equal('Unauthorized');
+          expect(res.body.error).to.equal('Unauthorized, you must be an agent');
           done();
         });
     });
@@ -406,7 +406,7 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
         .set('authorization', userToken2)
         .end((err, res) => {
           expect(res.body.status).to.equal('error');
-          expect(res.body.error).to.equal('Unauthorized');
+          expect(res.body.error).to.equal('Unauthorized, you must be an agent');
           done();
         });
     });
