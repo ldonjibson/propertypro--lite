@@ -6,7 +6,6 @@ class RegularExpression {
  */
   static validate() {
     return {
-      // eslint-disable-next-line no-useless-escape
       email: /[a-z0-9\._%+!$&*=^|~#%'`?{}/\-]+@([a-z0-9\-]+\.){1,}([a-z]{2,16})/,
       phoneNumber: /^[0-9]*$/,
       userName: /^[a-zA-Z]{3,25}$/,

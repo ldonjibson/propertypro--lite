@@ -15,7 +15,6 @@ class AuthMiddleware {
      * @param {function} next next middleware function
      * @returns {object} returns error message if user is not authenticated
      */
-  // eslint-disable-next-line consistent-return
   static async checkIfUserIsAuthenticated(req, res, next) {
     try {
       const { authorization } = req.headers || req.params || req.body;

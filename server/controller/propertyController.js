@@ -16,7 +16,6 @@ import pool from '../db/config';
     * @param {object} res - Response object
     * @returns {object} Json
     */
-// class PropertyController {
 class PropertyController {
   /**
     * @static postProperty
@@ -142,7 +141,6 @@ class PropertyController {
         users on properties.owner = users.id ORDER BY properties.id;`);
       }
       const data = getProperties.rows.map((property) => {
-        // eslint-disable-next-line no-shadow
         const { pid, owner, type, status, city, state, address, price, createdon, imageurl,
           firstname, lastname, email, phonenumber, accounttype } = property;
         return { id: pid, owner, type, status, city, state, address, price: parseFloat(price).toFixed(2),

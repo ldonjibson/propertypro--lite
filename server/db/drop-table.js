@@ -8,10 +8,7 @@ async function deleteTables() {
   try {
     await pool.query(dropPropertiesTable);
     await pool.query(dropUsersTable);
-    console.log('Tables deleted');
-  } catch (error) {
-    console.log('Tables didn\'t drop');
-  }
+  } catch (error) {}
 }
 
 deleteTables();

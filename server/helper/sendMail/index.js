@@ -23,20 +23,17 @@ class sendMail {
      * @param {string} temporaryPassword
      * @returns {string} returns status sent
      */
-  // eslint-disable-next-line consistent-return
   static async passwordReset(temporaryPassword, email) {
     const mailOptions = {
       from: process.env.GMAIL_EMAIL,
-      to: email, // list of receivers
+      to: email,
       subject: 'Subject of your email',
       html: `<p>Your temporary password is "${temporaryPassword}"</p>`,
     };
     try {
       await transporter.sendMail(mailOptions, (info) => {
-        console.log(info);
       });
     } catch (error) {
-      console.log(error);
       return 'sent';
     }
   }

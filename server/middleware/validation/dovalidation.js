@@ -8,7 +8,6 @@ class DoValidation {
   static email(req, res, next) {
     let { email } = req.body;
     const validate = RegularExpression.validate();
-    // eslint-disable-next-line prefer-destructuring
     if (!email) { email = req.params.email; }
     if (!validate.email.test(email)) {
       return response.errorResponse(res, 400, 'error', ValidationMessages.email);
@@ -111,9 +110,6 @@ class DoValidation {
     if (!validate.address.test(state.trim())) {
       return response.errorResponse(res, 400, 'error', ValidationMessages.state);
     }
-    // if (!validate.address.test(address.trim())) {
-    //   return response.errorResponse(res, 400, 'error', ValidationMessages.address);
-    // }
     return next();
   }
 

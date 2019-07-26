@@ -45,19 +45,14 @@ const create = async (arr, table) => {
       const query = `INSERT into ${table} (${keys}) values(${values})`;
       await queryDb(query);
     }
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
 };
 
 const createAllTables = async () => {
   try {
     await create(users, 'users');
     await create(property, 'properties');
-    console.log('all tables have been created');
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
 };
 
 createAllTables();
