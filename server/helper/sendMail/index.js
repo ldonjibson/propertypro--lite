@@ -33,10 +33,8 @@ class sendMail {
     };
     try {
       await transporter.sendMail(mailOptions, (info) => {
-        console.log(info);
       });
     } catch (error) {
-      console.log(error);
       return 'sent';
     }
   }
