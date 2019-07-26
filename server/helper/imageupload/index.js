@@ -21,7 +21,6 @@ class UploadingImage {
      * @param {function} next next middleware function
      * @returns {object} returns error message if user is not authenticated
      */
-  // eslint-disable-next-line consistent-return
   static async uploadFile(req, res, next) {
     let resultingimageurl;
     const {

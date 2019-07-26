@@ -2,7 +2,6 @@
 /* eslint-disable object-curly-newline */
 /* eslint-disable camelcase */
 /* eslint-disable prefer-const */
-// eslint-disable-next-line dot-notation
 import response from '../helper/response/index';
 import sendMail from '../helper/sendMail/index';
 import TokenManager from '../helper/tokenManager';
@@ -101,7 +100,6 @@ class UserController {
         return response.errorResponse(res, 404, 'error', 'User does not exist');
       }
       if (password && new_password) {
-        // eslint-disable-next-line max-len
         const isPasswordValid = PasswordManager.verifyPassword(password, userDetails.rows[0].password);
         if (isPasswordValid === false) {
           return response.errorResponse(res, 400, 'error', 'Incorrect Password');

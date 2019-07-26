@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-console
 import express from 'express';
 import path from 'path';
 import bodyparser from 'body-parser';

@@ -185,7 +185,7 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(401);
           expect(res.body.status).to.equal('error');
-          expect(res.body.error).to.equal('Unauthorized');
+          expect(res.body.error).to.equal('Unauthorized, you must be an agent');
           done();
         });
     });
@@ -321,7 +321,7 @@ describe('POST, PATCH, DELETE, GET /property/', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(401);
           expect(res.body.status).to.equal('error');
-          expect(res.body.error).to.equal('Unauthorized');
+          expect(res.body.error).to.equal('Unauthorized, you must be an agent');
           done();
         });
     });
